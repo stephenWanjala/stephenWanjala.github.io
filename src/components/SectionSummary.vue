@@ -1,5 +1,5 @@
 <template>
-  <section >
+  <section>
     <h2 class="section-title">
       <span class="icon-holder"><i class="fa-solid fa-user"></i></span>
       Career Profile
