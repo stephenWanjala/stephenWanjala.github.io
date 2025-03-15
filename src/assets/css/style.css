@@ -44,8 +44,6 @@ p {
 
 .wrapper {
   background: #42a8c0;
-  /*max-width: 1400px;*/
-  /*margin: 0 auto;*/
   position: relative;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -157,7 +155,10 @@ p {
 
 .main-wrapper {
   background: #fff;
-  padding: 60px 300px 60px 60px;
+  margin-right: 400px;
+  padding: 60px 40px;
+  min-height: 100vh;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
 }
 .main-wrapper .section-title {
   font-size: 1.6em;
@@ -234,11 +235,13 @@ p {
 @media (max-width: 768px) {
   .sidebar-wrapper {
     position: static;
-    width: inherit;
+    width: 100%;
+    min-height: auto;
   }
 
   .main-wrapper {
-    padding: 30px;
+    margin-right: 0;
+    padding: 30px 20px;
   }
 
   .main-wrapper .time {
