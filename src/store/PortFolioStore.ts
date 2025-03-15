@@ -33,7 +33,14 @@ export const usePortFolioStore = defineStore("portfolio", () => {
   const languages = ref<Language[]>([]);
   const isLoading = ref(false);
 
-  // Initialize data
+  /**
+   * Initializes the portfolio store with data.
+   *
+   * This function assigns imported data to the store's reactive properties. It populates work experiences,
+   * technologies, education levels, and languages with the corresponding data arrays. The loading state is
+   * set to true at the start and reset to false at the end, ensuring that the state is updated even if an error
+   * occurs during initialization. Any errors encountered are logged to the console.
+   */
   function initializeStore() {
     try {
       isLoading.value = true;
