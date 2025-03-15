@@ -22,15 +22,16 @@ export const useProjectStore = defineStore("project", () => {
       projects.value = await new Promise<Project[]>((resolve, reject) => {
         getProjectWithStars((result: Project[]) => {
           if (!result || result.length === 0) {
-            reject(new Error('No projects found'));
+            reject(new Error("No projects found"));
             return;
           }
           resolve(result);
         });
       });
     } catch (err) {
-      error.value = err instanceof Error ? err.message : 'Failed to fetch projects';
-      console.error('Project fetch error:', err);
+      error.value =
+        err instanceof Error ? err.message : "Failed to fetch projects";
+      console.error("Project fetch error:", err);
     } finally {
       isLoading.value = false;
     }

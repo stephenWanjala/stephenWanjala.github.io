@@ -17,6 +17,5 @@ const { educationLevels } = usePortFolioStore();
       <h5 class="meta">{{ education.school }}</h5>
       <div class="time">{{ education.duration }}</div>
     </div>
-    <!--//item-->
   </div>
 </template>

@@ -45,15 +45,16 @@ export let projects: Project[] = [
     image: "/images/multiply.gif",
   },
   {
-    name:"DB2JHelper",
-    url:"https://github.com/stephenWanjala/DB2JHelper",
+    name: "DB2JHelper",
+    url: "https://github.com/stephenWanjala/DB2JHelper",
     gitName: "stephenWanjala/DB2JHelper",
-    stars:"?",
-    forks:"?",
-    description:"Simplified Database Operations for Java JDBC A lightweight, modern Java library for effortless  database interactions",
-    tags:["Java","Library"],
+    stars: "?",
+    forks: "?",
+    description:
+      "Simplified Database Operations for Java JDBC A lightweight, modern Java library for effortless  database interactions",
+    tags: ["Java", "Library"],
     image: "/images/db2JHelper.png",
-  }
+  },
 ];
 
 // Cache Constants
@@ -138,7 +139,7 @@ export function openLink(url: string) {
 // Experience Data
 export const experiences: Experience[] = Array.of<Experience>(
   {
-    company: "Primesoft Solutions Limited",
+    company: "PrimeSoft Solutions Limited",
     companyLink: "https://primesoft.co.ke",
     logo: "images/primesoft.png",
     roles: [

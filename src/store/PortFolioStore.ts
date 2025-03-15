@@ -49,7 +49,7 @@ export const usePortFolioStore = defineStore("portfolio", () => {
       educationLevels.value = educations;
       languages.value = langs;
     } catch (error) {
-      console.error('Store initialization error:', error);
+      console.error("Store initialization error:", error);
     } finally {
       isLoading.value = false;
     }

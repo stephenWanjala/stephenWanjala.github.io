@@ -25,23 +25,15 @@ onMounted(async () => {
       <span class="icon-holder"><i class="fa-solid fa-archive"></i></span>
       Projects
     </h2>
-    
+
     <!-- Error handling -->
-    <v-alert
-      v-if="projectStore.error"
-      type="error"
-      class="mb-4"
-    >
+    <v-alert v-if="projectStore.error" type="error" class="mb-4">
       {{ projectStore.error }}
     </v-alert>
 
     <!-- Loading state -->
     <div v-if="projectStore.isLoading" class="d-flex justify-center my-4">
-      <VSkeletonLoader
-        type="card"
-        class="mx-auto"
-        width="300"
-      />
+      <VSkeletonLoader type="card" class="mx-auto" width="300" />
     </div>
 
     <!-- Projects grid -->
