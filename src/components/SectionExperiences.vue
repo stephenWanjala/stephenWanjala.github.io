@@ -158,9 +158,8 @@ const animateExperiences = () => {
 
 <style lang="scss" scoped>
 .experience-section {
-  max-width: 900px;
-  //margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  padding: 2rem 0;
 }
 
 .section-header {
@@ -168,23 +167,20 @@ const animateExperiences = () => {
   position: relative;
 
   h2 {
-    //font-size: 2rem;
-    //font-weight: 700;
-    //margin: 0;
-    //display: flex;
-    //align-items: center;
-    //gap: 1rem;
+    color: #2d3748;
+    margin-bottom: 1rem;
 
     i {
-      color: #4a5568;
+      color: #0077B5;
       font-size: 1.5rem;
+      margin-right: 0.5rem;
     }
   }
 
   .header-line {
     margin-top: 1rem;
     height: 3px;
-    background: linear-gradient(90deg, #4a5568 0%, #a0aec0 100%);
+    background: linear-gradient(90deg, #0077B5 0%, #00A0DC 100%);
     border-radius: 2px;
   }
 }
@@ -200,7 +196,7 @@ const animateExperiences = () => {
     top: 0;
     bottom: 0;
     width: 2px;
-    background: #e2e8f0;
+    background: #0077B5;
   }
 }
 
@@ -218,10 +214,15 @@ const animateExperiences = () => {
     top: 1.5rem;
     width: 1rem;
     height: 1rem;
-    background: #4a5568;
+    background: #0077B5;
     border-radius: 50%;
     border: 2px solid #fff;
-    box-shadow: 0 0 0 3px #e2e8f0;
+    box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.2);
+    transition: transform 0.2s ease;
+  }
+
+  &:hover .timeline-dot {
+    transform: scale(1.2);
   }
 }
 
@@ -229,67 +230,64 @@ const animateExperiences = () => {
   background: #fff;
   border-radius: 1rem;
   padding: 1.5rem;
-  box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow:
-      0 10px 15px -3px rgba(0, 0, 0, 0.1),
-      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
   }
 }
 
 .company-header {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
 .logo-container {
   flex-shrink: 0;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
 
   .company-logo {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 0.75rem;
   }
 
   .logo-placeholder {
     width: 100%;
     height: 100%;
-    background: #e2e8f0;
-    border-radius: 0.75rem;
+    background: #f7fafc;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
     font-weight: 600;
-    color: #4a5568;
+    color: #0077B5;
   }
 }
 
 .company-info {
   h3 {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
     font-weight: 600;
     margin: 0;
+    color: #2d3748;
 
     a {
-      color: #2d3748;
+      color: inherit;
       text-decoration: none;
       transition: color 0.2s ease;
 
       &:hover {
-        color: #4299e1;
+        color: #0077B5;
       }
     }
   }
@@ -297,7 +295,7 @@ const animateExperiences = () => {
 
 .roles-container {
   .role {
-    padding: 1rem 0;
+    padding: 1.5rem 0;
     border-top: 1px solid #e2e8f0;
 
     &:first-child {
@@ -311,7 +309,7 @@ const animateExperiences = () => {
   margin-bottom: 1rem;
 
   h4 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 600;
     color: #2d3748;
     margin: 0 0 0.5rem 0;
@@ -319,7 +317,8 @@ const animateExperiences = () => {
 
   .duration {
     font-size: 0.9rem;
-    color: #718096;
+    color: #0077B5;
+    font-weight: 500;
   }
 }
 
@@ -330,17 +329,18 @@ const animateExperiences = () => {
 
   li {
     position: relative;
-    padding-left: 1.5rem;
-    margin-bottom: 0.75rem;
+    padding-left: 1.75rem;
+    margin-bottom: 1rem;
     color: #4a5568;
-    font-size: 0.95rem;
-    line-height: 1.5;
+    font-size: 1rem;
+    line-height: 1.6;
 
     &::before {
       content: "•";
       position: absolute;
       left: 0.5rem;
-      color: #4299e1;
+      color: #0077B5;
+      font-size: 1.2rem;
     }
 
     &:last-child {
@@ -349,9 +349,9 @@ const animateExperiences = () => {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .experience-section {
-    padding: 1rem;
+    padding: 1.5rem 0;
   }
 
   .timeline {
@@ -360,16 +360,23 @@ const animateExperiences = () => {
 
   .experience-item .timeline-dot {
     left: -1.9rem;
+    width: 0.8rem;
+    height: 0.8rem;
   }
 
   .company-header {
     flex-direction: column;
     align-items: flex-start;
+    gap: 1rem;
   }
 
   .logo-container {
     width: 3rem;
     height: 3rem;
+  }
+
+  .company-info h3 {
+    font-size: 1.2rem;
   }
 }
 </style>
