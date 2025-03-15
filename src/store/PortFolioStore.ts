@@ -11,37 +11,8 @@ import { defineStore } from "pinia";
 import { ref, type Ref } from "vue";
 
 export const usePortFolioStore = defineStore("portfolio", () => {
-  const workExperiences: Ref<Experience[]> = ref([]);
-  const contact: Ref<Contact> = ref({} as Contact);
-  const technologies: Ref<Skill[]> = ref([]);
-  const educationLevels: Ref<Education[]> = ref([]);
-  const languages: Ref<Language[]> = ref([]);
-  let isLoading: Ref<boolean> = ref(false);
-
-  (() => {
-    isLoading.value = true;
-    workExperiences.value = experiences;
-    isLoading.value = false;
-  })();
-
-  (() => {
-    isLoading.value = true;
-    technologies.value = skills;
-    isLoading.value = false;
-  })();
-
-  (() => {
-    isLoading.value = true;
-    educationLevels.value = educations;
-  })();
-
-  (() => {
-    isLoading.value = true;
-    languages.value = langs;
-    isLoading.value = false;
-  })();
-
-  contact.value = {
+  const workExperiences = ref<Experience[]>([]);
+  const contact = ref<Contact>({
     email: "stephenwanjala145@gmail.com",
     phone: "+254723441923",
     linkedin: {
@@ -56,7 +27,36 @@ export const usePortFolioStore = defineStore("portfolio", () => {
       userName: "Wanjalastephen5",
       link: "https://twitter.com/wanjalastephen5",
     },
-  };
+  });
+  const technologies = ref<Skill[]>([]);
+  const educationLevels = ref<Education[]>([]);
+  const languages = ref<Language[]>([]);
+  const isLoading = ref(false);
+
+  /**
+   * Initializes the portfolio store with data.
+   *
+   * This function assigns imported data to the store's reactive properties. It populates work experiences,
+   * technologies, education levels, and languages with the corresponding data arrays. The loading state is
+   * set to true at the start and reset to false at the end, ensuring that the state is updated even if an error
+   * occurs during initialization. Any errors encountered are logged to the console.
+   */
+  function initializeStore() {
+    try {
+      isLoading.value = true;
+      workExperiences.value = experiences;
+      technologies.value = skills;
+      educationLevels.value = educations;
+      languages.value = langs;
+    } catch (error) {
+      console.error('Store initialization error:', error);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  // Initialize on store creation
+  initializeStore();
 
   return {
     workExperiences,
