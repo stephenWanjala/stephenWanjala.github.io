@@ -32,7 +32,7 @@ onMounted(() => {
       <h3 class="tagline">Software Developer</h3>
 
       <div class="profile-actions">
-        <a href="mailto:stepehnwanjala145@gmail.com" class="action-button">
+        <a href="mailto:stephenwanjala145@gmail.com" class="action-button">
           <i class="fas fa-envelope"></i> Contact Me
         </a>
         <a href="/resume.pdf" target="_blank" class="action-button secondary">
