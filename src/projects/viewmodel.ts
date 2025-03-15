@@ -236,7 +236,7 @@ export const educations: Education[] = [
   {
     degree: "BSc. Information Technology",
     school: "Maseno University",
-    duration: "2020 - May 2024",
+    duration: "2020 - 2024",
   },
   {
     degree: "KCSE",
@@ -247,6 +247,6 @@ export const educations: Education[] = [
 
 // Languages
 export const langs: Language[] = [
-  { name: "English", description: "" },
-  { name: "Swahili", description: "" },
+  { name: "English", description: "Fluent" },
+  { name: "Swahili", description: "Fluent" },
 ];
