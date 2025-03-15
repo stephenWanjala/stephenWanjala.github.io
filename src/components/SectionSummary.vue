@@ -1,5 +1,5 @@
 <template>
-  <section class="section summary-section">
+  <section >
     <h2 class="section-title">
       <span class="icon-holder"><i class="fa-solid fa-user"></i></span>
       Career Profile
@@ -14,7 +14,7 @@
           Proficient in Python Django &#38; Kotlin Ktor for backend development
         </li>
         <li>
-          Skilled in crafting dynamic web interfaces with Vue.js.&amp; NextJs
+          Skilled in crafting dynamic web interfaces with Vue.js &amp; NextJs.
         </li>
         <li>
           Committed to continuous learning, innovation, and creative
@@ -27,6 +27,5 @@
         <li>Open to collaborative opportunities in Tech</li>
       </ul>
     </div>
-    <!--//summary-->
   </section>
 </template>
