@@ -6,25 +6,14 @@
     </h2>
     <div class="summary">
       <ul>
+        <li>Mobile app developer experienced with Jetpack Compose.</li>
         <li>
-          Software Developer with a strong foundation in mobile app development
-          using Jetpack Compose.
+          Backend development skills in Kotlin Ktor,fastify and Python Django.
         </li>
-        <li>
-          Proficient in Python Django &#38; Kotlin Ktor for backend development
-        </li>
-        <li>
-          Skilled in crafting dynamic web interfaces with Vue.js &amp; NextJs.
-        </li>
-        <li>
-          Committed to continuous learning, innovation, and creative
-          problem-solving.
-        </li>
-        <li>
-          Eager to contribute to impactful projects that leverage cutting-edge
-          technologies.
-        </li>
-        <li>Open to collaborative opportunities in Tech</li>
+        <li>Web development experience with Vue.js and Next.js.</li>
+        <li>Passionate about learning and creative problem-solving in tech.</li>
+        <li>Seeking opportunities to contribute to innovative projects.</li>
+        <li>Interested in collaborative tech roles.</li>
       </ul>
     </div>
   </section>
@@ -45,7 +34,7 @@
 }
 
 .section-title::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -3px;
   left: 0;
@@ -92,7 +81,7 @@
 }
 
 .summary li::before {
-  content: '→';
+  content: "→";
   position: absolute;
   left: 0;
   color: #3498db;

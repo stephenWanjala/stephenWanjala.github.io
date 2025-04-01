@@ -100,7 +100,7 @@ onMounted(() => {
 }
 
 .skill-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -143,7 +143,7 @@ onMounted(() => {
   .v-icon {
     font-size: 3rem !important;
   }
-  
+
   .text-h6 {
     font-size: 1rem !important;
   }

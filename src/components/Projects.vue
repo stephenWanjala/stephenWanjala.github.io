@@ -192,14 +192,16 @@ onMounted(async () => {
   margin-top: auto;
 }
 
-.tags, .contributors {
+.tags,
+.contributors {
   background: #f7fafc;
   border-radius: 8px;
   padding: 1rem;
   border: 1px solid #e2e8f0;
 }
 
-.tags ul, .contributors ul {
+.tags ul,
+.contributors ul {
   list-style: none;
   margin: 0.5rem 0 0;
   padding: 0;

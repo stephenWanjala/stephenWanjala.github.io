@@ -171,7 +171,7 @@ const animateExperiences = () => {
     margin-bottom: 1rem;
 
     i {
-      color: #0077B5;
+      color: #0077b5;
       font-size: 1.5rem;
       margin-right: 0.5rem;
     }
@@ -180,7 +180,7 @@ const animateExperiences = () => {
   .header-line {
     margin-top: 1rem;
     height: 3px;
-    background: linear-gradient(90deg, #0077B5 0%, #00A0DC 100%);
+    background: linear-gradient(90deg, #0077b5 0%, #00a0dc 100%);
     border-radius: 2px;
   }
 }
@@ -196,7 +196,7 @@ const animateExperiences = () => {
     top: 0;
     bottom: 0;
     width: 2px;
-    background: #0077B5;
+    background: #0077b5;
   }
 }
 
@@ -214,7 +214,7 @@ const animateExperiences = () => {
     top: 1.5rem;
     width: 1rem;
     height: 1rem;
-    background: #0077B5;
+    background: #0077b5;
     border-radius: 50%;
     border: 2px solid #fff;
     box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.2);
@@ -270,7 +270,7 @@ const animateExperiences = () => {
     justify-content: center;
     font-size: 1.5rem;
     font-weight: 600;
-    color: #0077B5;
+    color: #0077b5;
   }
 }
 
@@ -287,7 +287,7 @@ const animateExperiences = () => {
       transition: color 0.2s ease;
 
       &:hover {
-        color: #0077B5;
+        color: #0077b5;
       }
     }
   }
@@ -317,7 +317,7 @@ const animateExperiences = () => {
 
   .duration {
     font-size: 0.9rem;
-    color: #0077B5;
+    color: #0077b5;
     font-weight: 500;
   }
 }
@@ -339,7 +339,7 @@ const animateExperiences = () => {
       content: "•";
       position: absolute;
       left: 0.5rem;
-      color: #0077B5;
+      color: #0077b5;
       font-size: 1.2rem;
     }
 
