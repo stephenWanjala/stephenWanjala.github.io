@@ -1,50 +1,11 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: "npm" # See documentation for possible values
+    directory: "/" # Location of package manifests
     schedule:
-      interval: "weekly"
+      interval: "weekly" # Frequency of checks
+    open-pull-requests-limit: 1 # Limit to a single open PR
     groups:
-      vue-ecosystem:
+      all-updates:
         patterns:
-          - "vue"
-          - "@vue/*"
-          - "vue-router"
-          - "vue-tsc"
-          - "@vitejs/plugin-vue"
-          - "@vue/language-core"
-
-      state-and-utils:
-        patterns:
-          - "pinia"
-          - "@vueuse/core"
-          - "gsap"
-
-      ui-libraries:
-        patterns:
-          - "bootstrap"
-          - "vuetify"
-          - "sass-embedded"
-
-      dev-tools:
-        patterns:
-          - "vite"
-          - "eslint"
-          - "prettier"
-          - "@rushstack/eslint-patch"
-          - "npm-run-all"
-          - "@tsconfig/node18"
-          - "@types/node"
-          - "@vue/eslint-config-prettier"
-          - "@vue/eslint-config-typescript"
-          - "@vue/tsconfig"
-      dev-tools-typescript:
-        patterns:
-          - "typescript"
-          - "ts-node"
-          - "tsconfig-paths"
-          - "tsconfig-paths/register"
-      http-and-deploy:
-        patterns:
-          - "axios"
-          - "gh-pages"
+          - "*" # Match all dependencies
