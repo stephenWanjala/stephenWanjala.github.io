@@ -21,10 +21,12 @@ const { educationLevels } = usePortFolioStore();
           <h4 class="degree">{{ education.degree }}</h4>
           <div class="duration">{{ education.duration }}</div>
         </div>
-        <h5 class="school">
+        <p
+          class="flex items-center gap-2 m-0 text-opacity-80 text-white text-sm"
+        >
           <i class="fas fa-university school-icon"></i>
           {{ education.school }}
-        </h5>
+        </p>
       </div>
     </div>
   </div>

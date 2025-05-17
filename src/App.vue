@@ -4,7 +4,7 @@ import { RouterLink, RouterView } from "vue-router";
 
 <template>
   <header>
-    <div class="wrapper">
+    <div class="bg-[#42a8c0] relative shadow-md shadow-black/10">
       <nav>
         <RouterLink to="/" />
       </nav>

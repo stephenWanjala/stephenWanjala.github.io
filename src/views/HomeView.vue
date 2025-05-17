@@ -7,7 +7,7 @@ import Projects from "@/components/Projects.vue";
 import FooterVue from "@/components/FooterVue.vue";
 </script>
 <template>
-  <div class="wrapper mt-lg-5">
+  <div class="bg-[#42a8c0] relative shadow-md shadow-black/10 mt-lg-5">
     <SideBarVue />
     <div class="main-wrapper">
       <SectionSummary />
