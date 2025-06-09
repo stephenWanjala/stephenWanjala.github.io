@@ -45,9 +45,9 @@ onMounted(async () => {
             :alt="project.name"
             :src="project.image"
             class="card-img-top img-fluid"
-            cover
-            aspect-ratio="16/9"
             :title="project.name"
+            cover
+            height="300px"
           >
             <template v-slot:placeholder>
               <div class="d-flex align-center justify-center fill-height">
