@@ -114,11 +114,16 @@ onMounted(async () => {
               <p class="m-2 font-lg">{{ project.forks }} forks</p>
 
               <VBtn
-                class="btn btn-outline-secondary"
-                variant="outlined"
-                @click="openLink(project.url)"
+                  class="btn btn-outline-secondary"
+                  variant="outlined"
+                  @click="openLink(project.webLink ? project.webLink : project.url)"
               >
-                Source <i class="bi bi-github ml-2"></i>
+                <span v-if="project.webLink"> WebLink</span>
+                <span v-else> Source</span>
+                <i
+                    class="ml-2"
+                    :class="project.webLink ? 'bi bi-link-45deg' : 'bi bi-github'"
+                ></i>
               </VBtn>
             </div>
           </div>

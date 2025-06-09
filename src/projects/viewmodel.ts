@@ -19,6 +19,7 @@ export interface Project {
   description?: string;
   tags: string[];
   contributors?: Contributor[];
+  webLink?: string;
 }
 
 // Projects Data
@@ -65,6 +66,7 @@ export let projects: Project[] = [
       "Recipes Data Of BBC Holiday Dishes",
     tags: ["Android", "Kotlin", "JetPack Compose","Room","Ktor","Paging & Caching","Fastify","Prisma","Postgres","NextJs"],
     image: "/images/brecipes.png",
+     webLink:"https://brecipes-fastify-web.vercel.app/"
   },
 ];
 
