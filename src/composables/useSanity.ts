@@ -123,21 +123,9 @@ const getGitHubData = async (owner: string, repo: string) => {
   }
 
   try {
-    const headers: HeadersInit = {
-      Accept: "application/vnd.github.v3+json",
-    };
-
-    // Add GitHub token if available
-    const githubToken = import.meta.env.VITE_GITHUB_TOKEN;
-    if (githubToken) {
-      headers["Authorization"] = `token ${githubToken}`;
-    }
-
     const [repoResponse, contributorsResponse] = await Promise.all([
-      fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers }),
-      fetch(`https://api.github.com/repos/${owner}/${repo}/contributors`, {
-        headers,
-      }),
+      fetch(`https://api.github.com/repos/${owner}/${repo}`),
+      fetch(`https://api.github.com/repos/${owner}/${repo}/contributors`),
     ]);
 
     if (repoResponse.ok && contributorsResponse.ok) {
