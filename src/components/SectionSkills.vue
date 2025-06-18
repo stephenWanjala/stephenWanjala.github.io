@@ -2,21 +2,24 @@
 import { onMounted, ref } from "vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { usePortFolioStore } from "@/store/PortFolioStore.ts";
+import { useSkills } from "@/composables/useSanity";
 
-const { technologies } = usePortFolioStore();
+const { skills, isLoading, error, fetchSkills } = useSkills();
 const skillsSection = ref<HTMLElement | null>(null);
 const loadingIcons = ref<Record<string, boolean>>({});
 
 gsap.registerPlugin(ScrollTrigger);
 
-onMounted(() => {
-  technologies.forEach((skill) => {
-    loadingIcons.value[skill.title] = true;
+onMounted(async () => {
+  // Fetch skills from Sanity using Vue composable
+  await fetchSkills();
+  
+  skills.value.forEach((skill) => {
+    loadingIcons.value[skill.name] = true;
 
     // Simulated loading delay
     setTimeout(() => {
-      loadingIcons.value[skill.title] = false;
+      loadingIcons.value[skill.name] = false;
     }, 1000);
   });
 
@@ -42,10 +45,20 @@ onMounted(() => {
       Tech Stack & Frameworks
     </h2>
 
-    <v-row class="justify-center">
+    <!-- Error handling -->
+    <v-alert v-if="error" type="error" class="mb-4">
+      {{ error }}
+    </v-alert>
+
+    <!-- Loading state -->
+    <div v-if="isLoading" class="d-flex justify-center my-4">
+      <v-progress-circular indeterminate color="primary" size="40" />
+    </div>
+
+    <v-row v-else class="justify-center">
       <v-col
-        v-for="skill in technologies"
-        :key="skill.title"
+        v-for="skill in skills"
+        :key="skill._id || skill.name"
         cols="6"
         sm="4"
         md="3"
@@ -58,17 +71,18 @@ onMounted(() => {
             class="skill-card text-center pa-4"
             elevation="4"
           >
-            <template v-if="loadingIcons[skill.title]">
+            <template v-if="loadingIcons[skill.name]">
               <v-progress-circular indeterminate color="primary" size="40" />
             </template>
             <template v-else>
               <v-icon
                 size="64"
-                :class="`mb-4 ${skill.color} ${isHovering ? 'text-primary' : ''}`"
+                :class="`mb-4 ${isHovering ? 'text-primary' : ''}`"
                 :icon="skill.icon || 'mdi-code-braces'"
               />
             </template>
-            <div class="text-h6 font-weight-medium">{{ skill.title }}</div>
+            <div class="text-h6 font-weight-medium">{{ skill.name }}</div>
+            <div class="text-caption text-medium-emphasis">{{ skill.category }}</div>
           </v-card>
         </v-hover>
       </v-col>

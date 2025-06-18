@@ -1,21 +1,18 @@
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
 import { openLink, type Project } from "@/projects/viewmodel";
-import { useProjectStore } from "@/store/projectStore";
+import { useProjects } from "@/composables/useSanity";
 import { VSkeletonLoader } from "vuetify/components";
 
-const projectStore = useProjectStore(); // Initialize the Pinia store
-
-const projects = ref<Project[]>([]);
+const { projects, isLoading, error, fetchProjects } = useProjects();
 
 const startString = (project: Project) => {
   return parseInt(project.stars) === 1 ? "1 star" : `${project.stars} stars`;
 };
 
 onMounted(async () => {
-  // Dispatch an action to fetch the projects
-  await projectStore.fetchProjects();
-  projects.value = projectStore.projects;
+  // Fetch projects from Sanity using Vue composable
+  await fetchProjects();
 });
 </script>
 
@@ -27,19 +24,19 @@ onMounted(async () => {
     </h2>
 
     <!-- Error handling -->
-    <v-alert v-if="projectStore.error" type="error" class="mb-4">
-      {{ projectStore.error }}
+    <v-alert v-if="error" type="error" class="mb-4">
+      {{ error }}
     </v-alert>
 
     <!-- Loading state -->
-    <div v-if="projectStore.isLoading" class="d-flex justify-center my-4">
+    <div v-if="isLoading" class="d-flex justify-center my-4">
       <VSkeletonLoader type="card" class="mx-auto" width="300" />
     </div>
 
     <!-- Projects grid -->
     <div v-else class="row">
       <div class="card-container">
-        <div v-for="project in projects" :key="project.gitName" class="card">
+        <div v-for="project in projects" :key="project._id || project.gitName" class="card">
           <!-- Card content -->
           <VImg
             :alt="project.name"
@@ -72,7 +69,7 @@ onMounted(async () => {
                 </VCard>
 
                 <!-- Contributors -->
-                <VCard class="contributors">
+                <VCard v-if="project.contributors && project.contributors.length > 0" class="contributors">
                   <strong>Contributors:</strong>
                   <div class="row align-items-center">
                     <ul class="d-flex flex-wrap p-3">

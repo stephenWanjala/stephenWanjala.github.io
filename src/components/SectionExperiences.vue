@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { usePortFolioStore } from "@/store/PortFolioStore";
+import { useExperiences } from "@/composables/useSanity";
 import { computed, ref, onMounted } from "vue";
 import { useIntersectionObserver } from "@vueuse/core";
 import gsap from "gsap";
 import { VSkeletonLoader } from "vuetify/components";
 
-const portFolioStore = usePortFolioStore();
+const { experiences, isLoading, error, fetchExperiences } = useExperiences();
 const sectionRef = ref<HTMLElement | null>(null);
 
 const formatDate = (date: Date): string => {
@@ -55,7 +55,10 @@ const formatTimeRange = (
   return `${formattedStart} - ${formattedEnd} · ${timeSince}`;
 };
 
-onMounted(() => {
+onMounted(async () => {
+  // Fetch experiences from Sanity using Vue composable
+  await fetchExperiences();
+  
   if (sectionRef.value) {
     const { stop } = useIntersectionObserver(
       sectionRef.value,
@@ -89,13 +92,18 @@ const animateExperiences = () => {
         Experience
       </h2>
       <div class="header-line"></div>
-      <VSkeletonLoader v-if="portFolioStore.isLoading" type="card" />
+      <VSkeletonLoader v-if="isLoading" type="card" />
     </div>
+
+    <!-- Error handling -->
+    <v-alert v-if="error" type="error" class="mb-4">
+      {{ error }}
+    </v-alert>
 
     <div class="timeline">
       <div
-        v-for="experience in portFolioStore.workExperiences"
-        :key="experience.company"
+        v-for="experience in experiences"
+        :key="experience._id || experience.company"
         class="experience-item"
       >
         <div class="timeline-dot"></div>

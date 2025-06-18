@@ -172,7 +172,7 @@ export const experiences: Experience[] = Array.of<Experience>(
           "Contributing to development and maintenance of software desktop applications under the MaliPlus ERP.",
           "Collaborating with cross-functional teams to analyze, design, and implement assigned new features, modules and enhancements for MaliPlus ERP.",
           "Writing clean, maintainable, and efficient code, adhering to best practices and coding standards.",
-          "Debugging, and troubleshooting software issues ",
+          "Debugging, and troubleshooting software issues. ",
           "Providing technical support to clients, addressing their inquiries, troubleshooting issues, and offering guidance on using software applications effectively.",
           "Contributing to the development of software architecture, design patterns, and coding standards to ensure consistency and scalability.",
           "Participating in team meetings, stand-ups, and sprint planning sessions to coordinate work and prioritize tasks effectively.",

@@ -1,4 +1,5 @@
 interface Experience {
+  _id?: string;
   company: string;
   companyLink: string;
   logo?: string;
@@ -10,9 +11,22 @@ interface Experience {
 }
 
 interface Project {
-  title: string;
-  link: string;
-  tagline: string;
+  _id?: string;
+  name: string;
+  description?: string;
+  image: string;
+  url: string;
+  gitName: string;
+  stars: string;
+  forks: string;
+  tags: string[];
+  contributors?: {
+    login: string;
+    avatar_url: string;
+    html_url: string;
+    contributions: number;
+  }[];
+  webLink?: string;
 }
 
 interface Contact {
@@ -29,21 +43,48 @@ interface Social {
 }
 
 interface Skill {
-  title: string;
-  level: number;
-  icon: string;
-  color: string;
+  _id?: string;
+  name: string;
+  category: string;
+  proficiency: number;
+  icon?: string;
 }
 
 interface Education {
+  _id?: string;
+  institution: string;
   degree: string;
-  school: string;
-  duration: string;
+  field: string;
+  graduationDate: Date;
+  description?: string;
+  logo?: string;
 }
 
 interface Language {
+  _id?: string;
   name: string;
-  description: string;
+  proficiency: number;
+  icon?: string;
+}
+
+interface Hobby {
+  _id?: string;
+  name: string;
+  description?: string;
+  icon?: string;
+}
+
+interface Profile {
+  _id?: string;
+  name: string;
+  title: string;
+  summary: string;
+  avatar?: string;
+  socials?: {
+    platform: string;
+    url: string;
+    icon: string;
+  }[];
 }
 
 export type {
@@ -54,4 +95,6 @@ export type {
   Skill,
   Education,
   Language,
+  Hobby,
+  Profile,
 };
