@@ -1,7 +1,11 @@
 <script lang="ts" setup>
-import { usePortFolioStore } from "@/store/PortFolioStore";
+import {useEducation} from "@/composables/useSanity.ts";
+import {onMounted} from "vue";
 
-const { educationLevels } = usePortFolioStore();
+const {education, isLoading, error, fetchEducation} = useEducation();
+onMounted(async () => {
+  await fetchEducation();
+})
 </script>
 
 <template>
@@ -10,12 +14,18 @@ const { educationLevels } = usePortFolioStore();
       <i class="fas fa-graduation-cap title-icon"></i>
       Education
     </h2>
+    <v-alert v-if="error" type="error" class="mb-4">
+      {{ error }}
+    </v-alert>
+    <div v-if="isLoading" class="d-flex justify-center my-4">
+      <v-progress-circular indeterminate color="primary" size="40"/>
+    </div>
 
     <div class="education-list">
       <div
-        class="education-item"
-        v-for="education in educationLevels"
-        :key="education.degree"
+          class="education-item"
+          v-for="education in education"
+          :key="education.degree"
       >
         <div class="education-header">
           <h4 class="degree">{{ education.degree }}</h4>
