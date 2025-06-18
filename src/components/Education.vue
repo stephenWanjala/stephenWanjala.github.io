@@ -19,11 +19,11 @@ const { educationLevels } = usePortFolioStore();
       >
         <div class="education-header">
           <h4 class="degree">{{ education.degree }}</h4>
-          <div class="duration">{{ education.duration }}</div>
+          <div class="duration">{{ education.graduationDate.getFullYear() }}</div>
         </div>
         <h5 class="school">
           <i class="fas fa-university school-icon"></i>
-          {{ education.school }}
+          {{ education.institution }}
         </h5>
       </div>
     </div>

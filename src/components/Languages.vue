@@ -14,13 +14,13 @@
         <div class="language-header">
           <span class="language-name">{{ language.name }}</span>
           <div class="proficiency-badge">
-            {{ language.description }}
+            {{ language.proficiency }}
           </div>
         </div>
         <div class="proficiency-bar">
           <div
             class="proficiency-level"
-            :style="{ width: getProficiencyWidth(language.description) }"
+            :style="{ width: getProficiencyWidth(language.proficiency) }"
           ></div>
         </div>
       </div>
@@ -32,15 +32,10 @@
 import { usePortFolioStore } from "@/store/PortFolioStore";
 
 const { languages } = usePortFolioStore();
-const getProficiencyWidth = (description: string): string => {
-  const levels: { [key: string]: string } = {
-    Native: "100%",
-    Fluent: "90%",
-    Professional: "80%",
-    Intermediate: "60%",
-    Basic: "40%",
-  };
-  return levels[description] || "50%";
+const getProficiencyWidth = (proficiency: number): string => {
+  const percentage = (proficiency * 100)/10
+
+  return `${percentage}%`;
 };
 </script>
 
