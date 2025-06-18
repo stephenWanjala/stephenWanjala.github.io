@@ -207,40 +207,40 @@ export const experiences: Experience[] = Array.of<Experience>(
 // Skills Data
 export const skills: Skill[] = [
   {
-    title: "Django & Rest Framework",
-    level: 100,
+    name: "Django & Rest Framework",
+    proficiency: 100,
     icon: "devicon-django-plain",
-    color: "colored",
+    category:"Backend"
   },
   {
-    title: "Kotlin",
-    level: 100,
+    name: "Kotlin",
+    proficiency: 100,
     icon: "devicon-kotlin-plain",
-    color: "colored",
+    category: "Backend",
   },
   {
-    title: "Jetpack Compose",
-    level: 100,
+    name: "Jetpack Compose",
+    proficiency: 100,
     icon: "devicon-jetpackcompose-plain-wordmark",
-    color: "colored",
+    category: "colored",
   },
   {
-    title: "Java & JavaFX",
-    level: 100,
+    name: "Java & JavaFX",
+    proficiency: 100,
     icon: "devicon-java-plain-wordmark",
-    color: "colored",
+    category: "Frontend",
   },
   {
-    title: "Kotlin Ktor & Spring Boot",
-    level: 100,
+    name: "Kotlin Ktor & Spring Boot",
+    proficiency: 100,
     icon: "devicon-ktor-plain-wordmark",
-    color: "colored",
+    category: "Backend",
   },
   {
-    title: "Vue.js",
-    level: 100,
+    name: "Vue.js",
+    proficiency: 100,
     icon: "devicon-vuejs-plain",
-    color: "colored",
+    category: "Frontend",
   },
 ];
 
@@ -248,18 +248,20 @@ export const skills: Skill[] = [
 export const educations: Education[] = [
   {
     degree: "BSc. Information Technology",
-    school: "Maseno University",
-    duration: "2020 - 2024",
+    institution: "Maseno University",
+    graduationDate: new Date("2024-12-06"),
+    field:"Information Technology"
   },
   {
     degree: "KCSE",
-    school: "St Peter's Sang'alo High School",
-    duration: "2015 - 2019",
+    institution: "St Peter's Sang'alo High School",
+    graduationDate: new Date("2019-11-20"),
+    field:"HighSchool Education"
   },
 ];
 
 // Languages
 export const langs: Language[] = [
-  { name: "English", description: "Fluent" },
-  { name: "Swahili", description: "Fluent" },
+  { name: "English", proficiency: 10 },
+  { name: "Swahili", proficiency: 9 },
 ];
