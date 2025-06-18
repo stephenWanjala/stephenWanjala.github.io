@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { createClient } from '@sanity/client'
 import imageUrlBuilder from '@sanity/image-url'
 import type { Project, Experience, Skill, Education, Language, Hobby, Profile } from '@/types/Types'
@@ -100,6 +100,64 @@ const queries = {
   }`
 }
 
+// Cache for GitHub data
+const githubCache = new Map<string, { data: any; timestamp: number }>()
+const CACHE_DURATION = 5 * 60 * 1000 // 5 minutes
+
+// Function to get cached data or fetch from GitHub
+const getGitHubData = async (owner: string, repo: string) => {
+  const cacheKey = `${owner}/${repo}`
+  const cached = githubCache.get(cacheKey)
+  
+  // Return cached data if it's still valid
+  if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+    return cached.data
+  }
+  
+  try {
+    const headers: HeadersInit = {
+      'Accept': 'application/vnd.github.v3+json'
+    }
+    
+    // Add GitHub token if available
+    const githubToken = import.meta.env.VITE_GITHUB_TOKEN
+    if (githubToken) {
+      headers['Authorization'] = `token ${githubToken}`
+    }
+    
+    const [repoResponse, contributorsResponse] = await Promise.all([
+      fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers }),
+      fetch(`https://api.github.com/repos/${owner}/${repo}/contributors`, { headers })
+    ])
+
+    if (repoResponse.ok && contributorsResponse.ok) {
+      const repoData = await repoResponse.json()
+      const contributorsData = await contributorsResponse.json()
+      
+      const data = {
+        stars: repoData.stargazers_count.toString(),
+        forks: repoData.forks_count.toString(),
+        contributors: contributorsData.map((c: any) => ({
+          login: c.login,
+          avatar_url: c.avatar_url,
+          html_url: c.html_url,
+          contributions: c.contributions,
+        }))
+      }
+      
+      // Cache the data
+      githubCache.set(cacheKey, { data, timestamp: Date.now() })
+      return data
+    } else {
+      console.warn(`GitHub API error for ${owner}/${repo}:`, repoResponse.status, contributorsResponse.status)
+    }
+  } catch (err) {
+    console.error(`Error fetching GitHub data for ${owner}/${repo}:`, err)
+  }
+  
+  return null
+}
+
 // Generic data fetching composable
 export function useSanityData<T>(query: string) {
   const data = ref<T[]>([])
@@ -131,6 +189,8 @@ export function useSanityData<T>(query: string) {
 // Specific composables for each content type
 export function useProjects() {
   const { data, isLoading, error, fetchData } = useSanityData<Project>(queries.projects)
+  const projectsWithGitHubData = ref<Project[]>([])
+  const isGitHubLoading = ref(false)
   
   const processedProjects = computed(() => 
     data.value.map(project => ({
@@ -139,9 +199,57 @@ export function useProjects() {
     }))
   )
 
+  // Function to fetch GitHub data for projects
+  const fetchGitHubData = async () => {
+    if (!processedProjects.value.length) return
+    
+    isGitHubLoading.value = true
+    
+    try {
+      const projectsWithData = await Promise.all(
+        processedProjects.value.map(async (project) => {
+          if (project.gitName && project.gitName.includes('/')) {
+            const [owner, repo] = project.gitName.split('/')
+            const githubData = await getGitHubData(owner, repo)
+            
+            if (githubData) {
+              return {
+                ...project,
+                stars: githubData.stars,
+                forks: githubData.forks,
+                contributors: githubData.contributors
+              }
+            }
+          }
+          
+          // Return project with default values if GitHub fetch fails
+          return {
+            ...project,
+            stars: project.stars || '0',
+            forks: project.forks || '0',
+            contributors: project.contributors || []
+          }
+        })
+      )
+
+      projectsWithGitHubData.value = projectsWithData
+    } catch (err) {
+      console.error('Error fetching GitHub data:', err)
+    } finally {
+      isGitHubLoading.value = false
+    }
+  }
+
+  // Watch for changes in processedProjects and fetch GitHub data
+  watch(processedProjects, () => {
+    if (processedProjects.value.length > 0) {
+      fetchGitHubData()
+    }
+  }, { immediate: true })
+
   return {
-    projects: processedProjects,
-    isLoading,
+    projects: computed(() => projectsWithGitHubData.value.length > 0 ? projectsWithGitHubData.value : processedProjects.value),
+    isLoading: computed(() => isLoading.value || isGitHubLoading.value),
     error,
     fetchProjects: fetchData
   }

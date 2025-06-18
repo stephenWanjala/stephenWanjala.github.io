@@ -80,9 +80,26 @@ VITE_SANITY_DATASET=production
 VITE_SANITY_API_VERSION=2024-01-01
 VITE_SANITY_USE_CDN=true
 VITE_SANITY_TOKEN=your-token-optional
+
+# GitHub API Configuration (Optional - for better rate limiting)
+VITE_GITHUB_TOKEN=your-github-token-optional
 ```
 
 2. The Sanity client in `src/composables/useSanity.ts` is already configured to use these environment variables.
+
+### GitHub API Integration
+
+The portfolio automatically fetches stars, forks, and contributor data from GitHub for each project:
+
+- **Automatic Fetching**: When projects are loaded from Sanity, the system automatically fetches GitHub data
+- **Caching**: GitHub data is cached for 5 minutes to avoid excessive API calls
+- **Rate Limiting**: Using a GitHub token (optional) provides higher rate limits
+- **Fallback**: If GitHub API fails, the system falls back to data stored in Sanity
+
+To get a GitHub token (recommended):
+1. Go to GitHub Settings > Developer settings > Personal access tokens
+2. Generate a new token with `public_repo` scope
+3. Add it to your `.env` file as `VITE_GITHUB_TOKEN`
 
 ## Step 6: Start Sanity Studio
 

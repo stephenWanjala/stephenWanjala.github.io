@@ -30,7 +30,10 @@ onMounted(async () => {
 
     <!-- Loading state -->
     <div v-if="isLoading" class="d-flex justify-center my-4">
-      <VSkeletonLoader type="card" class="mx-auto" width="300" />
+      <div class="text-center">
+        <v-progress-circular indeterminate color="primary" size="40" class="mb-2" />
+        <p class="text-caption">Loading projects and GitHub data...</p>
+      </div>
     </div>
 
     <!-- Projects grid -->
