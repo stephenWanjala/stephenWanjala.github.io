@@ -16,7 +16,7 @@ onMounted(async () => {
       <span class="icon-holder"><i class="fa-solid fa-user"></i></span>
       Career Profile
     </h2>
-    
+
     <!-- Error handling -->
     <v-alert v-if="error" type="error" class="mb-4">
       {{ error }}
@@ -44,13 +44,16 @@ onMounted(async () => {
           />
         </div>
       </div>
-      
+
       <div class="summary-content">
         <p class="summary-text">{{ profile.summary }}</p>
       </div>
 
       <!-- Social links -->
-      <div v-if="profile.socials && profile.socials.length > 0" class="social-links">
+      <div
+        v-if="profile.socials && profile.socials.length > 0"
+        class="social-links"
+      >
         <h4>Connect with me:</h4>
         <div class="social-icons">
           <a

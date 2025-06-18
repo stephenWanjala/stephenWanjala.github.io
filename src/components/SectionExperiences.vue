@@ -58,7 +58,7 @@ const formatTimeRange = (
 onMounted(async () => {
   // Fetch experiences from Sanity using Vue composable
   await fetchExperiences();
-  
+
   if (sectionRef.value) {
     const { stop } = useIntersectionObserver(
       sectionRef.value,

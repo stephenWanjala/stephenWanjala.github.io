@@ -1,19 +1,19 @@
-import { createClient } from '@sanity/client'
-import imageUrlBuilder from '@sanity/image-url'
+import { createClient } from "@sanity/client";
+import imageUrlBuilder from "@sanity/image-url";
 
 export const client = createClient({
-  projectId: import.meta.env.VITE_SANITY_PROJECT_ID || 'your-project-id',
-  dataset: import.meta.env.VITE_SANITY_DATASET || 'production',
-  apiVersion: import.meta.env.VITE_SANITY_API_VERSION || '2024-01-01',
-  useCdn: import.meta.env.VITE_SANITY_USE_CDN === 'true',
-  token: import.meta.env.VITE_SANITY_TOKEN, 
-})
+  projectId: import.meta.env.VITE_SANITY_PROJECT_ID || "your-project-id",
+  dataset: import.meta.env.VITE_SANITY_DATASET || "production",
+  apiVersion: import.meta.env.VITE_SANITY_API_VERSION || "2024-01-01",
+  useCdn: import.meta.env.VITE_SANITY_USE_CDN === "true",
+  token: import.meta.env.VITE_SANITY_TOKEN,
+});
 
 // Image builder for Sanity images
-const builder = imageUrlBuilder(client)
+const builder = imageUrlBuilder(client);
 
 export function urlFor(source: any) {
-  return builder.image(source)
+  return builder.image(source);
 }
 
 // GROQ queries for your content
@@ -37,7 +37,7 @@ export const queries = {
       contributions
     }
   }`,
-  
+
   // Experiences
   experiences: `*[_type == "experience"] | order(startDate desc) {
     _id,
@@ -52,7 +52,7 @@ export const queries = {
       details
     }
   }`,
-  
+
   // Skills
   skills: `*[_type == "skill"] | order(category asc, name asc) {
     _id,
@@ -61,7 +61,7 @@ export const queries = {
     proficiency,
     icon
   }`,
-  
+
   // Education
   education: `*[_type == "education"] | order(graduationDate desc) {
     _id,
@@ -72,7 +72,7 @@ export const queries = {
     description,
     logo
   }`,
-  
+
   // Languages
   languages: `*[_type == "language"] | order(proficiency desc) {
     _id,
@@ -80,7 +80,7 @@ export const queries = {
     proficiency,
     icon
   }`,
-  
+
   // Hobbies
   hobbies: `*[_type == "hobby"] | order(name asc) {
     _id,
@@ -88,7 +88,7 @@ export const queries = {
     description,
     icon
   }`,
-  
+
   // Profile/Summary
   profile: `*[_type == "profile"][0] {
     _id,
@@ -101,5 +101,5 @@ export const queries = {
       url,
       icon
     }
-  }`
-} 
+  }`,
+};

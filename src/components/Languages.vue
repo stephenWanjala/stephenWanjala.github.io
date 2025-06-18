@@ -33,7 +33,7 @@ import { usePortFolioStore } from "@/store/PortFolioStore";
 
 const { languages } = usePortFolioStore();
 const getProficiencyWidth = (proficiency: number): string => {
-  const percentage = (proficiency * 100)/10
+  const percentage = (proficiency * 100) / 10;
 
   return `${percentage}%`;
 };

@@ -31,7 +31,12 @@ onMounted(async () => {
     <!-- Loading state -->
     <div v-if="isLoading" class="d-flex justify-center my-4">
       <div class="text-center">
-        <v-progress-circular indeterminate color="primary" size="40" class="mb-2" />
+        <v-progress-circular
+          indeterminate
+          color="primary"
+          size="40"
+          class="mb-2"
+        />
         <p class="text-caption">Loading projects and GitHub data...</p>
       </div>
     </div>
@@ -39,7 +44,11 @@ onMounted(async () => {
     <!-- Projects grid -->
     <div v-else class="row">
       <div class="card-container">
-        <div v-for="project in projects" :key="project._id || project.gitName" class="card">
+        <div
+          v-for="project in projects"
+          :key="project._id || project.gitName"
+          class="card"
+        >
           <!-- Card content -->
           <VImg
             :alt="project.name"
@@ -72,7 +81,10 @@ onMounted(async () => {
                 </VCard>
 
                 <!-- Contributors -->
-                <VCard v-if="project.contributors && project.contributors.length > 0" class="contributors">
+                <VCard
+                  v-if="project.contributors && project.contributors.length > 0"
+                  class="contributors"
+                >
                   <strong>Contributors:</strong>
                   <div class="row align-items-center">
                     <ul class="d-flex flex-wrap p-3">
@@ -114,15 +126,17 @@ onMounted(async () => {
               <p class="m-2 font-lg">{{ project.forks }} forks</p>
 
               <VBtn
-                  class="btn btn-outline-secondary"
-                  variant="outlined"
-                  @click="openLink(project.webLink ? project.webLink : project.url)"
+                class="btn btn-outline-secondary"
+                variant="outlined"
+                @click="
+                  openLink(project.webLink ? project.webLink : project.url)
+                "
               >
                 <span v-if="project.webLink"> WebLink</span>
                 <span v-else> Source</span>
                 <i
-                    class="ml-2"
-                    :class="project.webLink ? 'bi bi-link-45deg' : 'bi bi-github'"
+                  class="ml-2"
+                  :class="project.webLink ? 'bi bi-link-45deg' : 'bi bi-github'"
                 ></i>
               </VBtn>
             </div>

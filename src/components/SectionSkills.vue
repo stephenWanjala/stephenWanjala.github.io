@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 onMounted(async () => {
   // Fetch skills from Sanity using Vue composable
   await fetchSkills();
-  
+
   skills.value.forEach((skill) => {
     loadingIcons.value[skill.name] = true;
 
@@ -82,7 +82,9 @@ onMounted(async () => {
               />
             </template>
             <div class="text-h6 font-weight-medium">{{ skill.name }}</div>
-            <div class="text-caption text-medium-emphasis">{{ skill.category }}</div>
+            <div class="text-caption text-medium-emphasis">
+              {{ skill.category }}
+            </div>
           </v-card>
         </v-hover>
       </v-col>
