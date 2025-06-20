@@ -303,7 +303,7 @@ export function useSkills() {
   const processedSkills = computed(() =>
     data.value.map((skill) => ({
       ...skill,
-      icon: skill.icon ? urlFor(skill.icon).url() : skill.icon,
+      icon: skill.icon,
     })),
   );
 

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { onMounted, ref } from "vue";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useSkills } from "@/composables/useSanity";
+import {onMounted, ref} from "vue";
+import {gsap} from "gsap";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
+import {useSkills} from "@/composables/useSanity";
 
-const { skills, isLoading, error, fetchSkills } = useSkills();
+const {skills, isLoading, error, fetchSkills} = useSkills();
 const skillsSection = ref<HTMLElement | null>(null);
 const loadingIcons = ref<Record<string, boolean>>({});
 
@@ -52,34 +52,38 @@ onMounted(async () => {
 
     <!-- Loading state -->
     <div v-if="isLoading" class="d-flex justify-center my-4">
-      <v-progress-circular indeterminate color="primary" size="40" />
+      <v-progress-circular indeterminate color="primary" size="40"/>
     </div>
 
     <v-row v-else class="justify-center">
       <v-col
-        v-for="skill in skills"
-        :key="skill._id || skill.name"
-        cols="6"
-        sm="4"
-        md="3"
-        class="skill-item"
+          v-for="skill in skills"
+          :key="skill._id || skill.name"
+          cols="6"
+          sm="4"
+          md="3"
+          class="skill-item"
       >
         <v-hover v-slot="{ isHovering, props }">
           <v-card
-            v-bind="props"
-            :class="{ 'skill-card-hover': isHovering }"
-            class="skill-card text-center pa-4"
-            elevation="4"
+              v-bind="props"
+              :class="{ 'skill-card-hover': isHovering }"
+              class="skill-card text-center pa-4"
+              elevation="4"
           >
             <template v-if="loadingIcons[skill.name]">
-              <v-progress-circular indeterminate color="primary" size="40" />
+              <v-progress-circular indeterminate color="primary" size="40"/>
             </template>
             <template v-else>
-              <v-icon
-                size="64"
-                :class="`mb-4 ${isHovering ? 'text-primary' : ''}`"
-                :icon="skill.icon || 'mdi-code-braces'"
-              />
+              <i
+                  :class="[
+                  skill.icon,
+                  'colored',
+                  'mb-4',
+                  { 'text-primary': isHovering },
+                  'icon-large'
+                ]"
+              ></i>
             </template>
             <div class="text-h6 font-weight-medium">{{ skill.name }}</div>
             <div class="text-caption text-medium-emphasis">
@@ -125,6 +129,11 @@ onMounted(async () => {
   background: linear-gradient(90deg, #3498db, #2ecc71);
   opacity: 0;
   transition: opacity 0.3s ease;
+}
+
+.icon-large {
+  font-size: 3rem !important;
+  margin-bottom: 1rem;
 }
 
 .skill-card-hover {

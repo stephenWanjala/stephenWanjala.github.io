@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import {useEducation} from "@/composables/useSanity.ts";
-import {onMounted} from "vue";
+import { useEducation } from "@/composables/useSanity.ts";
+import { onMounted } from "vue";
 
-const {education, isLoading, error, fetchEducation} = useEducation();
+const { education, isLoading, error, fetchEducation } = useEducation();
 onMounted(async () => {
   await fetchEducation();
-})
+});
 </script>
 
 <template>
@@ -18,14 +18,14 @@ onMounted(async () => {
       {{ error }}
     </v-alert>
     <div v-if="isLoading" class="d-flex justify-center my-4">
-      <v-progress-circular indeterminate color="primary" size="40"/>
+      <v-progress-circular indeterminate color="primary" size="40" />
     </div>
 
     <div class="education-list">
       <div
-          class="education-item"
-          v-for="education in education"
-          :key="education.degree"
+        class="education-item"
+        v-for="education in education"
+        :key="education.degree"
       >
         <div class="education-header">
           <h4 class="degree">{{ education.degree }}</h4>
