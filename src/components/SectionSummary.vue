@@ -1,8 +1,19 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted, computed } from "vue";
 import { useProfile } from "@/composables/useSanity";
 
 const { profile, isLoading, error, fetchProfile } = useProfile();
+
+// Split summary text into sentences and format them for bullet points
+const formattedSummary = computed(() => {
+  if (!profile?.value?.summary) return [];
+
+  // Split by periods, filter out empty strings, and trim whitespace
+  return profile.value.summary
+    .split('.')
+    .filter(sentence => sentence.trim().length > 0)
+    .map(sentence => sentence.trim());
+});
 
 onMounted(async () => {
   // Fetch profile from Sanity using Vue composable
@@ -28,25 +39,12 @@ onMounted(async () => {
     </div>
 
     <div v-else-if="profile" class="summary">
-      <div class="profile-header">
-        <div class="profile-info">
-          <h3>{{ profile.name }}</h3>
-          <p class="title">{{ profile.title }}</p>
-        </div>
-        <div v-if="profile.avatar" class="profile-avatar">
-          <v-img
-            :src="profile.avatar"
-            :alt="profile.name"
-            width="80"
-            height="80"
-            rounded="circle"
-            cover
-          />
-        </div>
-      </div>
-
       <div class="summary-content">
-        <p class="summary-text">{{ profile.summary }}</p>
+        <ul class="summary-list">
+          <li v-for="(sentence, index) in formattedSummary" :key="index">
+            {{ sentence }}
+          </li>
+        </ul>
       </div>
 
       <!-- Social links -->
@@ -188,6 +186,12 @@ onMounted(async () => {
   text-decoration: none;
   color: #4a5568;
   transition: all 0.3s ease;
+}
+.name{
+  font-size: 32px;
+  font-weight: 900;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 .social-link:hover {
