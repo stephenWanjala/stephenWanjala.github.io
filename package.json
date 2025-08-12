@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "sanity": "sanity dev",
+    "sanitydev": "sanity dev",
+    "sanitystart": "sanity start",
+    "sanitybuild": "sanity build",
+    "sanitydeploy": "sanity deploy",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
