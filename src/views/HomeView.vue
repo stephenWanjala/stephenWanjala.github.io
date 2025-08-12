@@ -5,7 +5,9 @@ import SectionSummary from "@/components/SectionSummary.vue";
 import SectionExperiences from "@/components/SectionExperiences.vue";
 import Projects from "@/components/Projects.vue";
 import FooterVue from "@/components/FooterVue.vue";
+import ScrollToTop from "@/components/ScrollToTop.vue";
 </script>
+
 <template>
   <div class="wrapper mt-lg-5">
     <SideBarVue />
@@ -18,5 +20,6 @@ import FooterVue from "@/components/FooterVue.vue";
       <SectionSkills />
       <FooterVue />
     </div>
+    <ScrollToTop />
   </div>
 </template>
