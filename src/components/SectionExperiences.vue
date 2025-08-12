@@ -83,16 +83,16 @@ const animateExperiences = () => {
 
 <template>
   <section ref="sectionRef" class="experience-section">
-    <div class="section-header">
-      <h2 class="section-title">
-        <i class="fas fa-briefcase"></i>
-        Experience
-      </h2>
-      <div class="header-line"></div>
-      <VSkeletonLoader v-if="portFolioStore.isLoading" type="card" />
+    <h2 class="section-title">
+      <span class="icon-holder"><i class="fas fa-briefcase"></i></span>
+      Professional Experience
+    </h2>
+
+    <div v-if="portFolioStore.isLoading" class="loading-container">
+      <VSkeletonLoader type="card" />
     </div>
 
-    <div class="timeline">
+    <div v-else class="timeline">
       <div
         v-for="experience in portFolioStore.workExperiences"
         :key="experience.company"
@@ -113,7 +113,7 @@ const animateExperiences = () => {
               </div>
             </div>
             <div class="company-info">
-              <h3>
+              <h3 class="company-name">
                 <a
                   :href="experience.companyLink"
                   target="_blank"
@@ -132,7 +132,7 @@ const animateExperiences = () => {
               class="role"
             >
               <div class="role-header">
-                <h4>{{ role.jobTitle }}</h4>
+                <h4 class="role-title">{{ role.jobTitle }}</h4>
                 <span class="duration">
                   {{
                     formatTimeRange(
@@ -157,37 +157,51 @@ const animateExperiences = () => {
 </template>
 
 <style lang="scss" scoped>
-.experience-section {
-  width: 100%;
-  padding: 2rem 0;
-}
 
-.section-header {
+.section-title {
+  color: #111827;
   margin-bottom: 3rem;
   position: relative;
+  padding-bottom: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
 
-  h2 {
-    color: #2d3748;
-    margin-bottom: 1rem;
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 2px;
+}
 
-    i {
-      color: #0077b5;
-      font-size: 1.5rem;
-      margin-right: 0.5rem;
-    }
-  }
+.icon-holder {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
 
-  .header-line {
-    margin-top: 1rem;
-    height: 3px;
-    background: linear-gradient(90deg, #0077b5 0%, #00a0dc 100%);
-    border-radius: 2px;
-  }
+.loading-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
 }
 
 .timeline {
   position: relative;
-  padding-left: 2rem;
+  padding-left: 2.5rem;
+  max-width: 900px;
+
 
   &::before {
     content: "";
@@ -196,7 +210,8 @@ const animateExperiences = () => {
     top: 0;
     bottom: 0;
     width: 2px;
-    background: #0077b5;
+    background: linear-gradient(180deg, #667eea, #764ba2);
+    border-radius: 1px;
   }
 }
 
@@ -210,15 +225,15 @@ const animateExperiences = () => {
 
   .timeline-dot {
     position: absolute;
-    left: -2.4rem;
+    left: -2.9rem;
     top: 1.5rem;
-    width: 1rem;
-    height: 1rem;
-    background: #0077b5;
+    width: 1.2rem;
+    height: 1.2rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
     border-radius: 50%;
-    border: 2px solid #fff;
-    box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.2);
-    transition: transform 0.2s ease;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+    transition: transform 0.3s ease;
   }
 
   &:hover .timeline-dot {
@@ -227,16 +242,17 @@ const animateExperiences = () => {
 }
 
 .experience-card {
-  background: #fff;
-  border-radius: 1rem;
-  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e5e7eb;
   transition: all 0.3s ease;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-color: #667eea;
   }
 }
 
@@ -244,16 +260,17 @@ const animateExperiences = () => {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .logo-container {
   flex-shrink: 0;
   width: 4rem;
   height: 4rem;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
 
   .company-logo {
     width: 100%;
@@ -264,22 +281,22 @@ const animateExperiences = () => {
   .logo-placeholder {
     width: 100%;
     height: 100%;
-    background: #f7fafc;
+    background: linear-gradient(135deg, #667eea, #764ba2);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
     font-weight: 600;
-    color: #0077b5;
+    color: #ffffff;
   }
 }
 
 .company-info {
-  h3 {
-    font-size: 1.4rem;
+  .company-name {
+    font-size: 1.5rem;
     font-weight: 600;
     margin: 0;
-    color: #2d3748;
+    color: #111827;
 
     a {
       color: inherit;
@@ -287,7 +304,7 @@ const animateExperiences = () => {
       transition: color 0.2s ease;
 
       &:hover {
-        color: #0077b5;
+        color: #667eea;
       }
     }
   }
@@ -296,7 +313,7 @@ const animateExperiences = () => {
 .roles-container {
   .role {
     padding: 1.5rem 0;
-    border-top: 1px solid #e2e8f0;
+    border-top: 1px solid #e5e7eb;
 
     &:first-child {
       padding-top: 0;
@@ -306,19 +323,23 @@ const animateExperiences = () => {
 }
 
 .role-header {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 
-  h4 {
-    font-size: 1.2rem;
+  .role-title {
+    font-size: 1.25rem;
     font-weight: 600;
-    color: #2d3748;
-    margin: 0 0 0.5rem 0;
+    color: #111827;
+    margin: 0 0 0.75rem 0;
   }
 
   .duration {
-    font-size: 0.9rem;
-    color: #0077b5;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
     font-weight: 500;
+    display: inline-block;
   }
 }
 
@@ -329,9 +350,9 @@ const animateExperiences = () => {
 
   li {
     position: relative;
-    padding-left: 1.75rem;
+    padding-left: 2rem;
     margin-bottom: 1rem;
-    color: #4a5568;
+    color: #4b5563;
     font-size: 1rem;
     line-height: 1.6;
 
@@ -339,8 +360,9 @@ const animateExperiences = () => {
       content: "•";
       position: absolute;
       left: 0.5rem;
-      color: #0077b5;
-      font-size: 1.2rem;
+      color: #667eea;
+      font-size: 1.5rem;
+      font-weight: bold;
     }
 
     &:last-child {
@@ -351,17 +373,17 @@ const animateExperiences = () => {
 
 @media (max-width: 768px) {
   .experience-section {
-    padding: 1.5rem 0;
+    padding: 2rem 0;
   }
 
   .timeline {
-    padding-left: 1.5rem;
+    padding-left: 2rem;
   }
 
   .experience-item .timeline-dot {
-    left: -1.9rem;
-    width: 0.8rem;
-    height: 0.8rem;
+    left: -2.4rem;
+    width: 1rem;
+    height: 1rem;
   }
 
   .company-header {
@@ -375,8 +397,16 @@ const animateExperiences = () => {
     height: 3rem;
   }
 
-  .company-info h3 {
-    font-size: 1.2rem;
+  .company-info .company-name {
+    font-size: 1.25rem;
+  }
+
+  .experience-card {
+    padding: 1.5rem;
+  }
+
+  .role-header .role-title {
+    font-size: 1.125rem;
   }
 }
 </style>

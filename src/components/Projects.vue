@@ -20,10 +20,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="container mt-4">
+  <section class="projects-section">
     <h2 class="section-title">
       <span class="icon-holder"><i class="fa-solid fa-archive"></i></span>
-      Projects
+      Featured Projects
     </h2>
 
     <!-- Error handling -->
@@ -32,234 +32,376 @@ onMounted(async () => {
     </v-alert>
 
     <!-- Loading state -->
-    <div v-if="projectStore.isLoading" class="d-flex justify-center my-4">
+    <div v-if="projectStore.isLoading" class="loading-container">
       <VSkeletonLoader type="card" class="mx-auto" width="300" />
     </div>
 
     <!-- Projects grid -->
-    <div v-else class="row">
-      <div class="card-container">
-        <div v-for="project in projects" :key="project.gitName" class="card">
-          <!-- Card content -->
+    <div v-else class="projects-grid">
+      <div v-for="project in projects" :key="project.gitName" class="project-card">
+        <!-- Project image -->
+        <div class="project-image">
           <VImg
             :alt="project.name"
             :src="project.image"
-            class="card-img-top img-fluid"
             :title="project.name"
             cover
-            height="300px"
+            height="220px"
+            class="project-img"
           >
             <template v-slot:placeholder>
-              <div class="d-flex align-center justify-center fill-height">
+              <div class="image-placeholder">
                 <v-progress-circular
-                  color="grey-lighten-4"
+                  color="primary"
                   indeterminate
                 ></v-progress-circular>
               </div>
             </template>
           </VImg>
-          <div class="card-body">
-            <h5 class="card-title">{{ project.name }}</h5>
-            <p class="card-text">{{ project.description }}</p>
-            <div class="row">
-              <!-- Tags and Contributors -->
-              <div class="tags-and-contributors">
-                <VCard class="tags">
-                  <strong>Tags:</strong>
-                  <ul>
-                    <li v-for="tag in project.tags" :key="tag">{{ tag }}</li>
-                  </ul>
-                </VCard>
+        </div>
 
-                <!-- Contributors -->
-                <VCard class="contributors">
-                  <strong>Contributors:</strong>
-                  <div class="row align-items-center">
-                    <ul class="d-flex flex-wrap p-3">
-                      <li
-                        v-for="contributor in project.contributors"
-                        :key="contributor.login"
-                        class="col p-2 d-flex gap-1 text-center v-list-item--border"
-                      >
-                        <div class="d-flex text-center gap-2">
-                          <VImg
-                            :src="contributor.avatar_url"
-                            alt="Contributor Avatar"
-                            height="24"
-                            rounded="circle"
-                            width="24"
-                          />
-                          <a
-                            :href="contributor.html_url"
-                            class="text-center"
-                            target="_blank"
-                            >{{ contributor.login }}</a
-                          >
-                          <v-badge
-                            :content="contributor.contributions"
-                            class="text-center mt-4 mr-3"
-                            color="info"
-                            floating
-                          />
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </VCard>
+        <!-- Project content -->
+        <div class="project-content">
+          <h3 class="project-title">{{ project.name }}</h3>
+          <p class="project-description">{{ project.description }}</p>
+          
+          <!-- Project tags -->
+          <div class="project-tags">
+            <span v-for="tag in project.tags" :key="tag" class="tag">
+              {{ tag }}
+            </span>
+          </div>
+
+          <!-- Project stats -->
+          <div class="project-stats">
+            <div class="stat">
+              <i class="fas fa-star"></i>
+              <span>{{ startString(project) }}</span>
+            </div>
+            <div class="stat">
+              <i class="fas fa-code-branch"></i>
+              <span>{{ project.forks }} forks</span>
+            </div>
+          </div>
+
+          <!-- Contributors -->
+          <div class="contributors-section">
+            <h4 class="contributors-title">Contributors</h4>
+            <div class="contributors-list">
+              <div
+                v-for="contributor in project.contributors"
+                :key="contributor.login"
+                class="contributor"
+              >
+                <VImg
+                  :src="contributor.avatar_url"
+                  alt="Contributor Avatar"
+                  height="32"
+                  rounded="circle"
+                  width="32"
+                  class="contributor-avatar"
+                />
+                <a
+                  :href="contributor.html_url"
+                  target="_blank"
+                  class="contributor-name"
+                >
+                  {{ contributor.login }}
+                </a>
+                <v-badge
+                  :content="contributor.contributions"
+                  color="primary"
+                  floating
+                  class="contributor-badge"
+                />
               </div>
             </div>
+          </div>
 
-            <div class="d-flex justify-content-between align-items-center mt-3">
-              <p class="m-2 font-lg">{{ startString(project) }}</p>
-              <p class="m-2 font-lg">{{ project.forks }} forks</p>
-
-              <VBtn
-                  class="btn btn-outline-secondary"
-                  variant="outlined"
-                  @click="openLink(project.webLink ? project.webLink : project.url)"
-              >
-                <span v-if="project.webLink"> WebLink</span>
-                <span v-else> Source</span>
-                <i
-                    class="ml-2"
-                    :class="project.webLink ? 'bi bi-link-45deg' : 'bi bi-github'"
-                ></i>
-              </VBtn>
-            </div>
+          <!-- Action button -->
+          <div class="project-actions">
+            <VBtn
+              class="action-btn"
+              variant="outlined"
+              @click="openLink(project.webLink ? project.webLink : project.url)"
+            >
+              <span v-if="project.webLink">Visit Site</span>
+              <span v-else>View Code</span>
+              <i
+                class="ml-2"
+                :class="project.webLink ? 'fas fa-external-link-alt' : 'fab fa-github'"
+              ></i>
+            </VBtn>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped>
-/* Default styles for larger screens */
-.card-container {
+.projects-section {
+  width: 100%;
+  padding: 3rem 0;
+}
+
+.section-title {
+  color: #111827;
+  margin-bottom: 3rem;
+  position: relative;
+  padding-bottom: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 2px;
+}
+
+.icon-holder {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-  padding: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 2.5rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.card {
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
+.project-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
   overflow: hidden;
   transition: all 0.3s ease;
-  height: 100%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
 }
 
-.card-img-top {
+.project-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-img {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-bottom: 1px solid #e2e8f0;
+  transition: transform 0.3s ease;
 }
 
-.card-body {
-  padding: 1.5rem;
+.project-card:hover .project-img {
+  transform: scale(1.05);
+}
+
+.image-placeholder {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: #f3f4f6;
 }
 
-.card-title {
-  font-size: 1.25rem;
+.project-content {
+  padding: 2rem;
+}
+
+.project-title {
+  font-size: 1.5rem;
   font-weight: 600;
-  color: #2d3748;
-  margin: 0;
+  color: #111827;
+  margin: 0 0 1rem 0;
+  line-height: 1.3;
 }
 
-.card-text {
-  color: #4a5568;
-  font-size: 0.95rem;
+.project-description {
+  color: #6b7280;
+  font-size: 1rem;
   line-height: 1.6;
-  margin: 0;
+  margin: 0 0 1.5rem 0;
 }
 
-.tags-and-contributors {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: auto;
-}
-
-.tags,
-.contributors {
-  background: #f7fafc;
-  border-radius: 8px;
-  padding: 1rem;
-  border: 1px solid #e2e8f0;
-}
-
-.tags ul,
-.contributors ul {
-  list-style: none;
-  margin: 0.5rem 0 0;
-  padding: 0;
+.project-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
 }
 
-.tags li {
-  background: #ebf8ff;
-  color: #2b6cb0;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
+.tag {
+  background: #f3f4f6;
+  color: #374151;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
   font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-.contributors {
-  strong {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
+.tag:hover {
+  background: #e5e7eb;
+  color: #111827;
+}
 
-  ul {
-    gap: 1rem;
-  }
+.project-stats {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
 
-  li {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
 
-  a {
-    color: #2b6cb0;
-    font-size: 0.875rem;
-    &:hover {
-      color: #2c5282;
-    }
-  }
+.stat i {
+  color: #667eea;
+  font-size: 1rem;
+}
+
+.contributors-section {
+  margin-bottom: 1.5rem;
+}
+
+.contributors-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 1rem 0;
+}
+
+.contributors-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.contributor {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  background: #f9fafb;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.contributor:hover {
+  background: #f3f4f6;
+}
+
+.contributor-avatar {
+  border: 2px solid #e5e7eb;
+}
+
+.contributor-name {
+  color: #2563eb;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.contributor-name:hover {
+  color: #1d4ed8;
+}
+
+.contributor-badge {
+  margin-left: auto;
+}
+
+.project-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.action-btn {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 0.875rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-transform: none;
+  letter-spacing: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 140px;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.action-btn span {
+  display: inline-block;
+}
+
+.action-btn i {
+  font-size: 0.9rem;
 }
 
 @media (max-width: 768px) {
-  .card-container {
+  .projects-section {
+    padding: 2rem 0;
+  }
+
+  .projects-grid {
     grid-template-columns: 1fr;
-    padding: 1rem;
+    gap: 2rem;
+    padding: 0 1rem;
   }
 
-  .card-img-top {
-    height: 180px;
+  .project-content {
+    padding: 1.5rem;
   }
 
-  .card-body {
-    padding: 1rem;
+  .project-title {
+    font-size: 1.25rem;
+  }
+
+  .project-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contributors-list {
+    gap: 0.75rem;
   }
 }
 </style>
