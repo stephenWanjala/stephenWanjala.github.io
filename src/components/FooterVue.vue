@@ -8,7 +8,7 @@ const currentYear = ref(new Date().getFullYear());
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-text">
-        <i class="fas fa-heart heart-icon"></i>
+        <i class="fas fa-heart heart-icon" aria-hidden="true"></i>
         <span class="copyright">
           © {{ currentYear }} Wanjala Stephen. All rights reserved.
         </span>
@@ -18,11 +18,11 @@ const currentYear = ref(new Date().getFullYear());
           <i class="fas fa-envelope"></i>
           Contact
         </a>
-        <a href="https://github.com/stephenWanjala" target="_blank" class="footer-link">
+        <a href="https://github.com/stephenWanjala" target="_blank"  rel="noopener" class="footer-link">
           <i class="fab fa-github"></i>
           GitHub
         </a>
-        <a href="https://linkedin.com/in/stephen-wanjala" target="_blank" class="footer-link">
+        <a href="https://linkedin.com/in/stephen-wanjala" target="_blank"  rel="noopener" class="footer-link">
           <i class="fab fa-linkedin"></i>
           LinkedIn
         </a>

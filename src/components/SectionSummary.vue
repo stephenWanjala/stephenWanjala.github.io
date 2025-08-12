@@ -1,7 +1,7 @@
 <template>
   <section class="summary-section">
     <h2 class="section-title">
-      <span class="icon-holder"><i class="fa-solid fa-user"></i></span>
+      <span class="icon-holder"><i class="fa-solid fa-user" aria-hidden="true"></i></span>
       Career Profile
     </h2>
     <div class="summary">

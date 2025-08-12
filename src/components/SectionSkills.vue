@@ -38,7 +38,7 @@ onMounted(() => {
 <template>
   <section ref="skillsSection" class="skills-section">
     <h2 class="section-title">
-      <span class="icon-holder"><i class="fa-solid fa-rocket"></i></span>
+      <span class="icon-holder"><i class="fa-solid fa-rocket" aria-hidden="true"></i></span>
       Tech Stack & Frameworks
     </h2>
 
