@@ -1,7 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
-  "schedule": ["every 2 weeks"],
+  "schedule": ["every two weeks"],
   "packageRules": [
     {
       "groupName": "All dependencies updates",
