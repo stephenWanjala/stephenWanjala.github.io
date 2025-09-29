@@ -6,9 +6,14 @@
   "packageRules": [
     {
       "groupName": "All dependencies updates",
-      "matchDepTypes": ["dependencies", "devDependencies"],
+      "matchDepTypes": [
+        "dependencies",
+        "devDependencies"
+      ],
       "groupSlug": "all-deps",
-      "group": true
+      "group": {
+        "enabled": true
+      }
     }
   ]
 }
