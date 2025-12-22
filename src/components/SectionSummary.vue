@@ -1,20 +1,27 @@
 <template>
   <section class="summary-section">
     <h2 class="section-title">
-      <span class="icon-holder"><i class="fa-solid fa-user" aria-hidden="true"></i></span>
+      <span class="icon-holder"
+        ><i class="fa-solid fa-user" aria-hidden="true"></i
+      ></span>
       Career Profile
     </h2>
     <div class="summary">
       <div class="summary-content">
         <p class="summary-intro">
-          Experienced software developer with expertise in mobile, web, and backend development. 
-          Passionate about creating innovative solutions and continuously learning new technologies.
+          Experienced software developer with expertise in mobile, web, and
+          backend development. Passionate about creating innovative solutions
+          and continuously learning new technologies.
         </p>
         <ul class="summary-points">
           <li>Mobile app developer experienced with Jetpack Compose</li>
-          <li>Backend development skills in Kotlin Ktor, Fastify and Python Django</li>
+          <li>
+            Backend development skills in Kotlin Ktor, Fastify and Python Django
+          </li>
           <li>Web development experience with Vue.js and Next.js</li>
-          <li>Passionate about learning and creative problem-solving in tech</li>
+          <li>
+            Passionate about learning and creative problem-solving in tech
+          </li>
           <li>Seeking opportunities to contribute to innovative projects</li>
           <li>Interested in collaborative tech roles</li>
         </ul>

@@ -59,17 +59,16 @@ onMounted(() => {
   if (!sectionRef.value) return;
 
   const { stop } = useIntersectionObserver(
-      sectionRef.value,
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          animateExperiences();
-          stop();
-        }
-      },
-      { threshold: 0.2 },
+    sectionRef.value,
+    ([entry]) => {
+      if (entry?.isIntersecting) {
+        animateExperiences();
+        stop();
+      }
+    },
+    { threshold: 0.2 },
   );
 });
-
 
 const animateExperiences = () => {
   gsap.from(".experience-item", {
@@ -158,7 +157,6 @@ const animateExperiences = () => {
 </template>
 
 <style lang="scss" scoped>
-
 .section-title {
   color: #111827;
   margin-bottom: 3rem;
@@ -202,7 +200,6 @@ const animateExperiences = () => {
   position: relative;
   padding-left: 2.5rem;
   max-width: 900px;
-
 
   &::before {
     content: "";

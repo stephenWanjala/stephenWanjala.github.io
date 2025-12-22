@@ -38,7 +38,11 @@ onMounted(async () => {
 
     <!-- Projects grid -->
     <div v-else class="projects-grid">
-      <div v-for="project in projects" :key="project.gitName" class="project-card">
+      <div
+        v-for="project in projects"
+        :key="project.gitName"
+        class="project-card"
+      >
         <!-- Project image -->
         <div class="project-image">
           <VImg
@@ -64,7 +68,7 @@ onMounted(async () => {
         <div class="project-content">
           <h3 class="project-title">{{ project.name }}</h3>
           <p class="project-description">{{ project.description }}</p>
-          
+
           <!-- Project tags -->
           <div class="project-tags">
             <span v-for="tag in project.tags" :key="tag" class="tag">
@@ -129,7 +133,9 @@ onMounted(async () => {
               <span v-else>View Code</span>
               <i
                 class="ml-2"
-                :class="project.webLink ? 'fas fa-external-link-alt' : 'fab fa-github'"
+                :class="
+                  project.webLink ? 'fas fa-external-link-alt' : 'fab fa-github'
+                "
               ></i>
             </VBtn>
           </div>

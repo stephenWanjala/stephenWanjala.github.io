@@ -38,16 +38,14 @@ onMounted(() => {
 <template>
   <section ref="skillsSection" class="skills-section">
     <h2 class="section-title">
-      <span class="icon-holder"><i class="fa-solid fa-rocket" aria-hidden="true"></i></span>
+      <span class="icon-holder"
+        ><i class="fa-solid fa-rocket" aria-hidden="true"></i
+      ></span>
       Tech Stack & Frameworks
     </h2>
 
     <div class="skills-grid">
-      <div
-        v-for="skill in technologies"
-        :key="skill.title"
-        class="skill-item"
-      >
+      <div v-for="skill in technologies" :key="skill.title" class="skill-item">
         <v-hover v-slot="{ isHovering, props }">
           <v-card
             v-bind="props"

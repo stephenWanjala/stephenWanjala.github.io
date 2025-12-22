@@ -30,10 +30,15 @@ onMounted(() => {
       </div>
       <h1 class="name">Wanjala Stephen</h1>
       <h3 class="tagline">Software Developer</h3>
-      <p class="bio">Passionate about creating innovative solutions with modern technologies</p>
+      <p class="bio">
+        Passionate about creating innovative solutions with modern technologies
+      </p>
 
       <div class="profile-actions">
-        <a href="mailto:stephenwanjala145@gmail.com" class="action-button primary">
+        <a
+          href="mailto:stephenwanjala145@gmail.com"
+          class="action-button primary"
+        >
           <i class="fas fa-envelope"></i> Contact Me
         </a>
         <a href="/resume.pdf" target="_blank" class="action-button secondary">
@@ -85,14 +90,25 @@ onMounted(() => {
   right: -8px;
   bottom: -8px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.1)
+  );
   z-index: -1;
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 0.3; transform: scale(1.05); }
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.05);
+  }
 }
 
 .profile {
