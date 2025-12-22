@@ -56,17 +56,27 @@ export let projects: Project[] = [
     tags: ["Java", "Library"],
     image: "/images/db2JHelper.png",
   },
-   {
+  {
     name: "BRecipes",
     url: "https://github.com/stephenWanjala/brecipes-fastify ",
     gitName: "stephenWanjala/brecipes-fastify",
     stars: "?",
     forks: "?",
-    description:
-      "Recipes Data Of BBC Holiday Dishes",
-    tags: ["Android", "Kotlin", "JetPack Compose","Room","Ktor","Paging & Caching","Fastify","Prisma","Postgres","NextJs"],
+    description: "Recipes Data Of BBC Holiday Dishes",
+    tags: [
+      "Android",
+      "Kotlin",
+      "JetPack Compose",
+      "Room",
+      "Ktor",
+      "Paging & Caching",
+      "Fastify",
+      "Prisma",
+      "Postgres",
+      "NextJs",
+    ],
     image: "/images/brecipes.png",
-     webLink:"https://brecipes-fastify-web.vercel.app/"
+    webLink: "https://brecipes-fastify-web.vercel.app/",
   },
 ];
 
@@ -109,20 +119,22 @@ export function getProjectWithStars(onFinish: (result: Project[]) => void) {
       const project = projects[index];
       if (!project) return;
 
-      if (result.status === "fulfilled" && result.value && Array.isArray(result.value)) {
+      if (
+        result.status === "fulfilled" &&
+        result.value &&
+        Array.isArray(result.value)
+      ) {
         const [repoResponse, contributorsResponse] = result.value;
 
         if (repoResponse?.data && contributorsResponse?.data) {
           project.stars = repoResponse.data.stargazers_count.toString();
           project.forks = repoResponse.data.forks_count.toString();
-          project.contributors = contributorsResponse.data.map(
-              (c: any) => ({
-                login: c.login,
-                avatar_url: c.avatar_url,
-                html_url: c.html_url,
-                contributions: c.contributions,
-              }),
-          );
+          project.contributors = contributorsResponse.data.map((c: any) => ({
+            login: c.login,
+            avatar_url: c.avatar_url,
+            html_url: c.html_url,
+            contributions: c.contributions,
+          }));
         } else {
           console.error(`Incomplete data for ${project.name}`);
           project.stars = "?";
@@ -138,13 +150,15 @@ export function getProjectWithStars(onFinish: (result: Project[]) => void) {
     });
 
     projects.sort(
-        (a, b) => parseInt(b.stars) - parseInt(a.stars) || parseInt(b.forks) - parseInt(a.forks),
+      (a, b) =>
+        parseInt(b.stars) - parseInt(a.stars) ||
+        parseInt(b.forks) - parseInt(a.forks),
     );
 
     safeLocalStorage(
-        "set",
-        CACHE_KEY,
-        JSON.stringify({ data: projects, expires: Date.now() + CACHE_TTL }),
+      "set",
+      CACHE_KEY,
+      JSON.stringify({ data: projects, expires: Date.now() + CACHE_TTL }),
     );
 
     onFinish(projects);

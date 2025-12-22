@@ -18,11 +18,21 @@ const currentYear = ref(new Date().getFullYear());
           <i class="fas fa-envelope"></i>
           Contact
         </a>
-        <a href="https://github.com/stephenWanjala" target="_blank"  rel="noopener" class="footer-link">
+        <a
+          href="https://github.com/stephenWanjala"
+          target="_blank"
+          rel="noopener"
+          class="footer-link"
+        >
           <i class="fab fa-github"></i>
           GitHub
         </a>
-        <a href="https://linkedin.com/in/stephen-wanjala" target="_blank"  rel="noopener" class="footer-link">
+        <a
+          href="https://linkedin.com/in/stephen-wanjala"
+          target="_blank"
+          rel="noopener"
+          class="footer-link"
+        >
           <i class="fab fa-linkedin"></i>
           LinkedIn
         </a>
@@ -64,8 +74,13 @@ const currentYear = ref(new Date().getFullYear());
 }
 
 @keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 .copyright {
