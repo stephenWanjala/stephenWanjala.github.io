@@ -106,36 +106,47 @@ export function getProjectWithStars(onFinish: (result: Project[]) => void) {
 
   Promise.allSettled(requests).then((results) => {
     results.forEach((result, index) => {
-      if (result.status === "fulfilled" && result.value) {
+      const project = projects[index];
+      if (!project) return;
+
+      if (result.status === "fulfilled" && result.value && Array.isArray(result.value)) {
         const [repoResponse, contributorsResponse] = result.value;
-        projects[index].stars = repoResponse.data.stargazers_count.toString();
-        projects[index].forks = repoResponse.data.forks_count.toString();
-        projects[index].contributors = contributorsResponse.data.map(
-          (c: any) => ({
-            login: c.login,
-            avatar_url: c.avatar_url,
-            html_url: c.html_url,
-            contributions: c.contributions,
-          }),
-        );
+
+        if (repoResponse?.data && contributorsResponse?.data) {
+          project.stars = repoResponse.data.stargazers_count.toString();
+          project.forks = repoResponse.data.forks_count.toString();
+          project.contributors = contributorsResponse.data.map(
+              (c: any) => ({
+                login: c.login,
+                avatar_url: c.avatar_url,
+                html_url: c.html_url,
+                contributions: c.contributions,
+              }),
+          );
+        } else {
+          console.error(`Incomplete data for ${project.name}`);
+          project.stars = "?";
+          project.forks = "?";
+          project.contributors = [];
+        }
       } else {
-        console.error(`Error fetching data for ${projects[index].name}`);
-        projects[index].stars = "?";
-        projects[index].forks = "?";
-        projects[index].contributors = [];
+        console.error(`Error fetching data for ${project.name}`);
+        project.stars = "?";
+        project.forks = "?";
+        project.contributors = [];
       }
     });
 
     projects.sort(
-      (a, b) =>
-        parseInt(b.stars) - parseInt(a.stars) ||
-        parseInt(b.forks) - parseInt(a.forks),
+        (a, b) => parseInt(b.stars) - parseInt(a.stars) || parseInt(b.forks) - parseInt(a.forks),
     );
+
     safeLocalStorage(
-      "set",
-      CACHE_KEY,
-      JSON.stringify({ data: projects, expires: Date.now() + CACHE_TTL }),
+        "set",
+        CACHE_KEY,
+        JSON.stringify({ data: projects, expires: Date.now() + CACHE_TTL }),
     );
+
     onFinish(projects);
   });
 }
