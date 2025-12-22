@@ -56,19 +56,20 @@ const formatTimeRange = (
 };
 
 onMounted(() => {
-  if (sectionRef.value) {
-    const { stop } = useIntersectionObserver(
+  if (!sectionRef.value) return;
+
+  const { stop } = useIntersectionObserver(
       sectionRef.value,
-      ([{ isIntersecting }]) => {
-        if (isIntersecting) {
+      ([entry]) => {
+        if (entry?.isIntersecting) {
           animateExperiences();
           stop();
         }
       },
       { threshold: 0.2 },
-    );
-  }
+  );
 });
+
 
 const animateExperiences = () => {
   gsap.from(".experience-item", {
