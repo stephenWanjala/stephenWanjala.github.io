@@ -184,6 +184,7 @@ export const experiences: Experience[] = Array.of<Experience>(
       {
         time: { start: new Date("2024-09-01"), current: true },
         jobTitle: "Software Developer",
+        employmentType: "Full time,Onsite",
         details: [
           "Developing and maintaining software applications, including mobile, and desktop applications under the MaliPlus ERP.",
           "Design, and implement assigned features, modules, and enhancements for MaliPlus ERP.",
@@ -193,6 +194,7 @@ export const experiences: Experience[] = Array.of<Experience>(
       {
         time: { start: new Date("2024-05-25"), end: new Date("2024-08-30") },
         jobTitle: "Software Developer Intern",
+        employmentType: "Full time,Onsite",
         details: [
           "Contributing to development and maintenance of software desktop applications under the MaliPlus ERP.",
           "Collaborating with cross-functional teams to analyze, design, and implement assigned new features, modules and enhancements for MaliPlus ERP.",
@@ -213,6 +215,7 @@ export const experiences: Experience[] = Array.of<Experience>(
       {
         time: { start: new Date("2023-05-25"), end: new Date("2023-08-08") },
         jobTitle: "Information Technology Attachment",
+        employmentType: "Onsite",
         details: [
           "Configuring managed switches, implementing VLANs, and securing network communications through SSH and Telnet protocols.",
           "Performing general computer maintenance tasks, including hardware upgrades, memory enhancement, and installation of operating systems and software applications.",

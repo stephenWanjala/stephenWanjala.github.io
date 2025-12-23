@@ -133,15 +133,20 @@ const animateExperiences = () => {
             >
               <div class="role-header">
                 <h4 class="role-title">{{ role.jobTitle }}</h4>
-                <span class="duration">
-                  {{
-                    formatTimeRange(
-                      role.time.start,
-                      role.time.end,
-                      role.time.current,
-                    )
-                  }}
-                </span>
+                <div class="role-meta">
+                  <span class="duration">
+                    {{
+                      formatTimeRange(
+                        role.time.start,
+                        role.time.end,
+                        role.time.current,
+                      )
+                    }}
+                  </span>
+                  <span v-if="role.employmentType" class="employment-type">
+                    · {{ role.employmentType }}
+                  </span>
+                </div>
               </div>
               <ul class="achievements">
                 <li v-for="detail in role.details" :key="detail">
@@ -330,6 +335,13 @@ const animateExperiences = () => {
     margin: 0 0 0.75rem 0;
   }
 
+  .role-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
   .duration {
     background: linear-gradient(135deg, #667eea, #764ba2);
     color: white;
@@ -338,6 +350,12 @@ const animateExperiences = () => {
     font-size: 0.875rem;
     font-weight: 500;
     display: inline-block;
+  }
+
+  .employment-type {
+    color: #6b7280;
+    font-size: 0.875rem;
+    font-weight: 500;
   }
 }
 

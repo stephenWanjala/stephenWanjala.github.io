@@ -4,6 +4,7 @@ interface Experience {
   logo?: string;
   roles: {
     jobTitle: string;
+    employmentType?: string;
     time: { start: Date; end?: Date; current?: boolean };
     details: string[];
   }[];
