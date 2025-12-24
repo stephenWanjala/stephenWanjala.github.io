@@ -64,7 +64,7 @@ const currentYear = ref(new Date().getFullYear());
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: #6b7280;
+  color: var(--color-muted);
   font-size: 0.95rem;
 }
 
@@ -97,7 +97,7 @@ const currentYear = ref(new Date().getFullYear());
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #6b7280;
+  color: var(--color-muted);
   font-size: 0.9rem;
   font-weight: 500;
   text-decoration: none;
@@ -107,7 +107,7 @@ const currentYear = ref(new Date().getFullYear());
 }
 
 .footer-link:hover {
-  color: #667eea;
+  color: var(--color-primary);
   background: #f3f4f6;
   transform: translateY(-1px);
 }

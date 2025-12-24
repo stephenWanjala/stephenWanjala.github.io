@@ -97,12 +97,12 @@ onMounted(() => {
   left: 0;
   width: 80px;
   height: 3px;
-  background: linear-gradient(90deg, #667eea, #764ba2);
+  background: linear-gradient(90deg, var(--color-gradient-start), var(--color-gradient-end));
   border-radius: 2px;
 }
 
 .icon-holder {
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
   color: white;
   width: 40px;
   height: 40px;
@@ -111,7 +111,7 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   margin-right: 1rem;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.18);
 }
 
 .skills-grid {
@@ -152,7 +152,7 @@ onMounted(() => {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #667eea, #764ba2);
+  background: linear-gradient(90deg, var(--color-gradient-start), var(--color-gradient-end));
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -160,7 +160,7 @@ onMounted(() => {
 .skill-card-hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1) !important;
-  border-color: #667eea;
+  border-color: var(--color-gradient-start);
 }
 
 .skill-card-hover::before {
@@ -187,7 +187,7 @@ onMounted(() => {
 
 .icon-hover {
   transform: scale(1.1);
-  color: #667eea !important;
+  color: var(--color-gradient-start) !important;
 }
 
 .skill-name {

@@ -178,12 +178,12 @@ const animateExperiences = () => {
   left: 0;
   width: 80px;
   height: 3px;
-  background: linear-gradient(90deg, #667eea, #764ba2);
+  background: linear-gradient(90deg, var(--color-gradient-start), var(--color-gradient-end));
   border-radius: 2px;
 }
 
 .icon-holder {
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
   color: white;
   width: 40px;
   height: 40px;
@@ -192,7 +192,7 @@ const animateExperiences = () => {
   align-items: center;
   justify-content: center;
   margin-right: 1rem;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.18);
 }
 
 .loading-container {
@@ -213,7 +213,7 @@ const animateExperiences = () => {
     top: 0;
     bottom: 0;
     width: 2px;
-    background: linear-gradient(180deg, #667eea, #764ba2);
+    background: linear-gradient(180deg, var(--color-gradient-start), var(--color-gradient-end));
     border-radius: 1px;
   }
 }
@@ -232,10 +232,10 @@ const animateExperiences = () => {
     top: 1.5rem;
     width: 1.2rem;
     height: 1.2rem;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
     border-radius: 50%;
     border: 3px solid #fff;
-    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+    box-shadow: 0 0 0 4px rgba(44, 62, 80, 0.1);
     transition: transform 0.3s ease;
   }
 
@@ -255,7 +255,7 @@ const animateExperiences = () => {
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    border-color: #667eea;
+    border-color: var(--color-primary);
   }
 }
 
@@ -284,7 +284,7 @@ const animateExperiences = () => {
   .logo-placeholder {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -307,7 +307,7 @@ const animateExperiences = () => {
       transition: color 0.2s ease;
 
       &:hover {
-        color: #667eea;
+        color: var(--color-primary);
       }
     }
   }
@@ -343,7 +343,7 @@ const animateExperiences = () => {
   }
 
   .duration {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 20px;
@@ -376,7 +376,7 @@ const animateExperiences = () => {
       content: "•";
       position: absolute;
       left: 0.5rem;
-      color: #667eea;
+      color: var(--color-primary);
       font-size: 1.5rem;
       font-weight: bold;
     }

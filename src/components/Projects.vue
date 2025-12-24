@@ -167,12 +167,12 @@ onMounted(async () => {
   left: 0;
   width: 80px;
   height: 3px;
-  background: linear-gradient(90deg, #667eea, #764ba2);
+  background: linear-gradient(90deg, var(--color-gradient-start), var(--color-gradient-end));
   border-radius: 2px;
 }
 
 .icon-holder {
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
   color: white;
   width: 40px;
   height: 40px;
@@ -181,7 +181,7 @@ onMounted(async () => {
   align-items: center;
   justify-content: center;
   margin-right: 1rem;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.18);
 }
 
 .loading-container {
@@ -247,7 +247,7 @@ onMounted(async () => {
 }
 
 .project-description {
-  color: #6b7280;
+  color: var(--color-muted);
   font-size: 1rem;
   line-height: 1.6;
   margin: 0 0 1.5rem 0;
@@ -288,12 +288,12 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #6b7280;
+  color: var(--color-muted);
   font-size: 0.9rem;
 }
 
 .stat i {
-  color: #667eea;
+  color: var(--color-primary);
   font-size: 1rem;
 }
 
@@ -333,14 +333,14 @@ onMounted(async () => {
 }
 
 .contributor-name {
-  color: #2563eb;
+  color: var(--color-primary);
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
 }
 
 .contributor-name:hover {
-  color: #1d4ed8;
+  color: color-mix(in srgb, var(--color-primary) 80%, black 20%);
 }
 
 .contributor-badge {
@@ -353,7 +353,7 @@ onMounted(async () => {
 }
 
 .action-btn {
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
   color: white;
   border: none;
   padding: 0.875rem 2rem;
@@ -371,7 +371,7 @@ onMounted(async () => {
 
 .action-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8px 20px rgba(44, 62, 80, 0.18);
 }
 
 .action-btn span {

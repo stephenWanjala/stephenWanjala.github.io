@@ -1,7 +1,19 @@
+/* Theme variables */
+:root {
+  --color-primary: #1E3A8A;
+  --color-accent: #F97316;
+  --color-bg: #F8FAFC;
+  --color-text: #0F172A;
+  --color-muted: #CBD5E1;
+
+  --color-gradient-start: #1E3A8A;
+  --color-gradient-end: #F97316;
+}
+
 body {
   font-family: "Roboto", "Segoe UI", sans-serif;
-  color: #545e6c;
-  background: #868080;
+  color: var(--color-text);
+  background: var(--color-bg);
   font-size: 18px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -25,12 +37,12 @@ h6 {
 }
 
 a {
-  color: #3498db;
+  color: var(--color-primary);
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 a:hover {
-  color: #2980b9;
+  color: var(--color-accent);
   text-decoration: underline;
   transform: translateY(-1px);
 }
@@ -43,16 +55,16 @@ p {
 }
 
 .wrapper {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
   position: relative;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-wrapper {
   background: linear-gradient(
-    135deg,
-    rgba(102, 126, 234, 0.9) 0%,
-    rgba(118, 75, 162, 0.9) 100%
+          135deg,
+          rgba(2, 6, 23, 0.95) 0%,
+          rgba(56, 189, 248, 0.90) 100%
   );
   position: absolute;
   right: 0;
@@ -168,7 +180,7 @@ p {
 .main-wrapper .section-title {
   font-size: 1.6em;
   letter-spacing: 1px;
-  color: #2c3e50;
+  color: var(--color-text);
   margin-bottom: 30px;
   position: relative;
   padding-bottom: 10px;
@@ -180,7 +192,7 @@ p {
   left: 0;
   width: 50px;
   height: 3px;
-  background: #3498db;
+  background: var(--color-primary);
   border-radius: 2px;
 }
 .main-wrapper .section-title .icon-holder {
@@ -193,7 +205,7 @@ p {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
   text-align: center;
   font-size: 16px;
   position: relative;
@@ -202,19 +214,19 @@ p {
 }
 
 .job-title {
-  color: #3498db;
+  color: var(--color-primary);
   font-weight: 600;
   font-size: 1.2em;
 }
 
 .company {
-  color: #95a5a6;
+  color: var(--color-muted);
   font-weight: 500;
   margin-bottom: 15px;
 }
 
 .time {
-  background: #3498db;
+  background: var(--color-primary);
   color: white;
   padding: 3px 10px;
   border-radius: 12px;
@@ -233,7 +245,7 @@ p {
 }
 .footer .copyright {
   line-height: 1.6;
-  color: #545e6c;
+  color: var(--color-text);
   font-size: 13px;
 }
 

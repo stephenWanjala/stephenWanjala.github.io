@@ -48,7 +48,7 @@ onUnmounted(() => {
   right: 2rem;
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
   color: white;
   border: none;
   border-radius: 50%;
@@ -57,7 +57,7 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.18);
   transition: all 0.3s ease;
   z-index: 1000;
   opacity: 0.9;
@@ -65,7 +65,7 @@ onUnmounted(() => {
 
 .scroll-to-top:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8px 20px rgba(44, 62, 80, 0.24);
   opacity: 1;
 }
 

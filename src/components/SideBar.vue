@@ -170,9 +170,9 @@ onMounted(() => {
 }
 
 .action-button.primary {
-  background: rgba(255, 255, 255, 0.95);
-  color: #667eea;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: var(--color-primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .action-button.primary:hover {
