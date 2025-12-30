@@ -1,14 +1,36 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    ":separateMajorReleases",
+    ":combinePatchMinorReleases",
+    ":pinDigestsDisabled",
+    "group:monorepos",
+    "group:recommended"
   ],
+  "timezone": "UTC",
+  "schedule": ["at any time"],
+  "dependencyDashboard": true,
   "packageRules": [
     {
-      "groupName": "All dependencies updates",
-      "matchDepTypes": ["dependencies", "devDependencies"],
-      "groupSlug": "all-deps",
-      "group": true
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true,
+      "automergeType": "branch"
+    },
+    {
+      "matchPackageNames": ["node"],
+      "enabled": false
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "groupName": "devDependencies (non-major)",
+      "matchUpdateTypes": ["minor", "patch"]
     }
-  ]
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "addLabels": ["security"]
+  },
+  "labels": ["dependencies"],
+  "rangeStrategy": "bump"
 }
