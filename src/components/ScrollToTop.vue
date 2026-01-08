@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from "vue";
+import {onMounted, onUnmounted, ref} from "vue";
 
 const isVisible = ref(false);
 
 const scrollToTop = () => {
   const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
+      "(prefers-reduced-motion: reduce)",
   ).matches;
   window.scrollTo({
     top: 0,
@@ -18,7 +18,7 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
-  window.addEventListener("scroll", handleScroll, { passive: true });
+  window.addEventListener("scroll", handleScroll, {passive: true});
   handleScroll();
 });
 
@@ -30,11 +30,11 @@ onUnmounted(() => {
 <template>
   <Transition name="scroll-button">
     <button
-      v-if="isVisible"
-      @click="scrollToTop"
-      class="scroll-to-top"
-      aria-label="Scroll to top"
-      type="button"
+        v-if="isVisible"
+        @click="scrollToTop"
+        class="scroll-to-top"
+        aria-label="Scroll to top"
+        type="button"
     >
       <i class="fas fa-chevron-up"></i>
     </button>
@@ -81,22 +81,6 @@ onUnmounted(() => {
   transform: translateY(-2px);
 }
 
-/* Transition animations */
-.scroll-button-enter-active,
-.scroll-button-leave-active {
-  transition: all 0.3s ease;
-}
-
-.scroll-button-enter-from {
-  opacity: 0;
-  transform: translateY(20px) scale(0.8);
-}
-
-.scroll-button-leave-to {
-  opacity: 0;
-  transform: translateY(20px) scale(0.8);
-}
-
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .scroll-to-top {
@@ -116,11 +100,6 @@ onUnmounted(() => {
 
   .scroll-to-top:hover i {
     transform: none;
-  }
-
-  .scroll-button-enter-active,
-  .scroll-button-leave-active {
-    transition: none;
   }
 }
 </style>
