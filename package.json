@@ -13,34 +13,34 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "@vueuse/core": "^14.2.0",
-    "axios": "^1.13.4",
+    "@vueuse/core": "^14.2.1",
+    "axios": "^1.13.6",
     "bootstrap": "^5.3.8",
     "gh-pages": "^6.3.0",
     "gsap": "^3.14.2",
     "pinia": "^3.0.4",
     "vitest": "^4.0.18",
-    "vue": "^3.5.27",
-    "vue-router": "^5.0.2",
-    "vuetify": "^3.11.8"
+    "vue": "^3.5.29",
+    "vue-router": "^5.0.3",
+    "vuetify": "^3.12.1"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.15.0",
+    "@rushstack/eslint-patch": "^1.16.1",
     "@tsconfig/node24": "^24.0.4",
-    "@types/node": "^25.2.1",
+    "@types/node": "^25.3.2",
     "@vitejs/plugin-vue": "^6.0.4",
     "@vue/eslint-config-prettier": "^10.2.0",
-    "@vue/eslint-config-typescript": "^14.6.0",
-    "@vue/language-core": "^3.2.4",
+    "@vue/eslint-config-typescript": "^14.7.0",
+    "@vue/language-core": "^3.2.5",
     "@vue/tsconfig": "^0.8.1",
-    "eslint": "^10.0.0",
-    "eslint-plugin-vue": "^10.7.0",
+    "eslint": "^10.0.2",
+    "eslint-plugin-vue": "^10.8.0",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.8.1",
     "sass-embedded": "^1.97.3",
     "typescript": "^5.9.3",
     "vite": "7.3.1",
-    "vue-tsc": "^3.2.4"
+    "vue-tsc": "^3.2.5"
   },
   "packageManager": "pnpm@10.29.2"
 }
