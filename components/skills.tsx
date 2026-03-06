@@ -2,8 +2,8 @@ import { educations, languages, skills } from '@/lib/data'
 
 export function Skills() {
   return (
-    <section id="skills" className="py-20 px-4 bg-card">
-      <div className="max-w-4xl mx-auto">
+    <section id="skills" className="py-20 px-4 bg-background">
+      <div className="max-w-6xl mx-auto">
         {/* Technical Skills */}
         <div className="mb-20">
           <div className="mb-12">
@@ -11,19 +11,10 @@ export function Skills() {
             <div className="h-1 w-20 bg-accent rounded-full" />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-3 gap-4">
             {skills.map((skill, index) => (
-              <div key={index} className="bg-background rounded-lg p-6 border border-card hover:border-accent transition-colors">
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-lg font-semibold text-primary">{skill.title}</h3>
-                  <span className="text-accent font-bold">{skill.level}%</span>
-                </div>
-                <div className="w-full bg-secondary rounded-full h-2">
-                  <div
-                    className="bg-accent h-2 rounded-full transition-all duration-500"
-                    style={{ width: `${skill.level}%` }}
-                  />
-                </div>
+              <div key={index} className="bg-background rounded-lg p-4 border border-card hover:border-accent transition-colors text-center">
+                <h3 className="text-base font-semibold text-primary">{skill.title}</h3>
               </div>
             ))}
           </div>

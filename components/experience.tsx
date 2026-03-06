@@ -7,8 +7,8 @@ export function Experience() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(0)
 
   return (
-    <section id="experience" className="py-20 px-4">
-      <div className="max-w-4xl mx-auto">
+    <section id="experience" className="py-20 px-4 bg-background">
+      <div className="max-w-6xl mx-auto">
         <div className="mb-12">
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4">Experience</h2>
           <div className="h-1 w-20 bg-accent rounded-full" />

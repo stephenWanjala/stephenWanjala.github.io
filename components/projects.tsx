@@ -5,8 +5,8 @@ import Image from 'next/image'
 
 export function Projects() {
   return (
-    <section id="projects" className="py-20 px-4">
-      <div className="max-w-4xl mx-auto">
+    <section id="projects" className="py-20 px-4 bg-card">
+      <div className="max-w-6xl mx-auto">
         <div className="mb-12">
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4">Projects</h2>
           <div className="h-1 w-20 bg-accent rounded-full" />

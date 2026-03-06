@@ -3,42 +3,109 @@
 import { contact } from '@/lib/data'
 import { useState } from 'react'
 
+interface FormState {
+  name: string
+  email: string
+  message: string
+  submitted: boolean
+  loading: boolean
+  error: string
+}
+
 export function Contact() {
-  const [formState, setFormState] = useState({
+  const [formState, setFormState] = useState<FormState>({
     name: '',
     email: '',
     message: '',
     submitted: false,
+    loading: false,
+    error: '',
   })
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    // Create mailto link with form data
-    const subject = `Message from ${formState.name}`
-    const body = `Name: ${formState.name}\nEmail: ${formState.email}\n\nMessage:\n${formState.message}`
-    window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  const [validationErrors, setValidationErrors] = useState<Partial<Record<keyof FormState, string>>>({})
 
-    // Show success message
-    setFormState((prev) => ({ ...prev, submitted: true }))
-    setTimeout(() => {
-      setFormState((prev) => ({ ...prev, submitted: false, name: '', email: '', message: '' }))
-    }, 3000)
+  const validateForm = (): boolean => {
+    const errors: Partial<Record<keyof FormState, string>> = {}
+
+    if (!formState.name.trim()) {
+      errors.name = 'Name is required'
+    }
+
+    if (!formState.email.trim()) {
+      errors.email = 'Email is required'
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email)) {
+      errors.email = 'Please enter a valid email address'
+    }
+
+    if (!formState.message.trim()) {
+      errors.message = 'Message is required'
+    } else if (formState.message.trim().length < 10) {
+      errors.message = 'Message must be at least 10 characters'
+    }
+
+    setValidationErrors(errors)
+    return Object.keys(errors).length === 0
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (!validateForm()) {
+      return
+    }
+
+    setFormState((prev) => ({ ...prev, loading: true, error: '' }))
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          message: formState.message,
+        }),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to send message')
+      }
+
+      setFormState((prev) => ({
+        ...prev,
+        submitted: true,
+        loading: false,
+        name: '',
+        email: '',
+        message: '',
+      }))
+
+      setTimeout(() => {
+        setFormState((prev) => ({ ...prev, submitted: false }))
+      }, 4000)
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Failed to send message. Please try again.'
+      setFormState((prev) => ({ ...prev, loading: false, error: errorMessage }))
+    }
   }
 
   return (
-    <section id="contact" className="py-20 px-4">
-      <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-12">
+    <section id="contact" className="py-20 px-4 bg-card">
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4">Get in Touch</h2>
           <div className="h-1 w-20 bg-accent rounded-full mx-auto mb-6" />
-          <p className="text-lg text-muted-foreground">
-            Have a project in mind or want to collaborate? I'd love to hear from you.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Have a project in mind or want to collaborate? I'd love to hear from you. Send me a message and I'll get back to you as soon as possible.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-3 gap-12 items-start">
           {/* Contact Info */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div>
               <h3 className="text-lg font-semibold text-primary mb-2">Email</h3>
               <a
@@ -97,57 +164,102 @@ export function Contact() {
           </div>
 
           {/* Contact Form */}
-          <form onSubmit={handleSubmit} className="space-y-6 bg-card rounded-lg p-6 border border-card">
+          <form onSubmit={handleSubmit} className="md:col-span-2 space-y-6 bg-background rounded-lg p-8 border border-card">
+            {/* Success Message */}
+            {formState.submitted && (
+              <div className="p-4 bg-accent/10 border border-accent rounded-lg">
+                <p className="text-accent font-medium">
+                  Thank you! I've received your message and will get back to you soon.
+                </p>
+              </div>
+            )}
+
+            {/* Error Message */}
+            {formState.error && (
+              <div className="p-4 bg-red-500/10 border border-red-500 rounded-lg">
+                <p className="text-red-600 dark:text-red-400 font-medium">{formState.error}</p>
+              </div>
+            )}
+
+            {/* Name Field */}
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-primary mb-2">
-                Name
+                Name <span className="text-accent">*</span>
               </label>
               <input
                 type="text"
                 id="name"
                 value={formState.name}
-                onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                required
-                className="w-full px-4 py-2 bg-background border border-card rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent transition-colors"
+                onChange={(e) => {
+                  setFormState({ ...formState, name: e.target.value })
+                  if (validationErrors.name) setValidationErrors({ ...validationErrors, name: '' })
+                }}
+                className={`w-full px-4 py-2 bg-card border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none transition-colors ${
+                  validationErrors.name ? 'border-red-500 focus:border-red-500' : 'border-card focus:border-accent'
+                }`}
                 placeholder="Your name"
               />
+              {validationErrors.name && (
+                <p className="text-red-500 text-sm mt-1">{validationErrors.name}</p>
+              )}
             </div>
 
+            {/* Email Field */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-primary mb-2">
-                Email
+                Email <span className="text-accent">*</span>
               </label>
               <input
                 type="email"
                 id="email"
                 value={formState.email}
-                onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                required
-                className="w-full px-4 py-2 bg-background border border-card rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent transition-colors"
+                onChange={(e) => {
+                  setFormState({ ...formState, email: e.target.value })
+                  if (validationErrors.email) setValidationErrors({ ...validationErrors, email: '' })
+                }}
+                className={`w-full px-4 py-2 bg-card border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none transition-colors ${
+                  validationErrors.email ? 'border-red-500 focus:border-red-500' : 'border-card focus:border-accent'
+                }`}
                 placeholder="your.email@example.com"
               />
+              {validationErrors.email && (
+                <p className="text-red-500 text-sm mt-1">{validationErrors.email}</p>
+              )}
             </div>
 
+            {/* Message Field */}
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-primary mb-2">
-                Message
+                Message <span className="text-accent">*</span>
               </label>
               <textarea
                 id="message"
                 value={formState.message}
-                onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                required
-                rows={5}
-                className="w-full px-4 py-2 bg-background border border-card rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent transition-colors resize-none"
-                placeholder="Your message..."
+                onChange={(e) => {
+                  setFormState({ ...formState, message: e.target.value })
+                  if (validationErrors.message) setValidationErrors({ ...validationErrors, message: '' })
+                }}
+                rows={6}
+                className={`w-full px-4 py-2 bg-card border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none transition-colors resize-none ${
+                  validationErrors.message ? 'border-red-500 focus:border-red-500' : 'border-card focus:border-accent'
+                }`}
+                placeholder="Tell me about your project or inquiry..."
               />
+              {validationErrors.message && (
+                <p className="text-red-500 text-sm mt-1">{validationErrors.message}</p>
+              )}
+              <p className="text-xs text-muted-foreground mt-1">
+                Minimum 10 characters required
+              </p>
             </div>
 
+            {/* Submit Button */}
             <button
               type="submit"
-              className="w-full px-6 py-3 bg-accent text-accent-foreground font-semibold rounded-lg hover:opacity-90 transition-opacity"
+              disabled={formState.loading}
+              className="w-full px-6 py-3 bg-accent text-accent-foreground font-semibold rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
             >
-              {formState.submitted ? 'Message sent! Opening email...' : 'Send Message'}
+              {formState.loading ? 'Sending...' : formState.submitted ? 'Message sent!' : 'Send Message'}
             </button>
           </form>
         </div>

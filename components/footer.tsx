@@ -3,13 +3,13 @@ import { contact } from '@/lib/data'
 export function Footer() {
   return (
     <footer className="border-t border-card bg-card/50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid md:grid-cols-2 gap-12 mb-12">
           {/* Left Column */}
           <div>
             <h3 className="text-2xl font-serif font-bold text-primary mb-4">Stephen Wanjala</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Full stack developer passionate about building elegant solutions to complex problems. 
+              Software developer passionate about building elegant solutions to complex problems. 
               Always learning, always building.
             </p>
             <div className="flex gap-4">

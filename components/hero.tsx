@@ -2,51 +2,34 @@ import { contact } from '@/lib/data'
 
 export function Hero() {
   return (
-    <section id="about" className="min-h-screen flex items-center justify-center px-4 py-20">
-      <div className="max-w-4xl mx-auto w-full">
-        <div className="grid md:grid-cols-3 gap-12 items-start">
-          {/* Left Column - Navigation */}
-          <div className="hidden md:block">
-            <div className="space-y-6 sticky top-24">
-              <div>
-                <div className="h-px w-10 bg-accent mb-4" />
-                <a
-                  href="#about"
-                  className="block text-sm font-semibold text-accent tracking-wider hover:text-accent/80 transition-colors"
-                >
-                  ABOUT
-                </a>
-              </div>
-              <div>
-                <div className="h-px w-10 bg-muted mb-4" />
-                <a
-                  href="#experience"
-                  className="block text-sm text-muted-foreground hover:text-accent transition-colors"
-                >
-                  EXPERIENCE
-                </a>
-              </div>
-              <div>
-                <div className="h-px w-10 bg-muted mb-4" />
-                <a
-                  href="#projects"
-                  className="block text-sm text-muted-foreground hover:text-accent transition-colors"
-                >
-                  PROJECTS
-                </a>
+    <section id="about" className="min-h-screen flex items-center justify-center px-4 py-20 bg-gradient-to-b from-background to-card">
+      <div className="max-w-7xl mx-auto w-full">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* Left Column - Profile Image */}
+          <div className="flex justify-center">
+            <div className="relative w-64 h-64 md:w-80 md:h-80">
+              <div className="absolute inset-0 bg-accent rounded-2xl opacity-20 blur-xl" />
+              <div className="relative w-full h-full bg-gradient-to-br from-accent/20 to-primary/20 rounded-2xl border-2 border-accent/30 flex items-center justify-center overflow-hidden">
+                <div className="text-center">
+                  <div className="w-48 h-48 md:w-64 md:h-64 bg-secondary rounded-2xl flex items-center justify-center">
+                    <svg className="w-32 h-32 text-accent/40" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Center Column - Main Content */}
-          <div className="md:col-span-2">
+          {/* Right Column - Main Content */}
+          <div>
             {/* Name and Title */}
             <div className="mb-12">
               <h1 className="text-5xl md:text-6xl font-serif font-bold text-primary mb-4 text-balance">
                 Stephen Wanjala
               </h1>
               <p className="text-xl md:text-2xl text-accent font-medium mb-6">
-                Full Stack Developer
+                Software Developer
               </p>
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl text-pretty">
                 I build accessible, pixel-perfect digital experiences. Currently crafting modern web and mobile
@@ -106,23 +89,24 @@ export function Hero() {
               </a>
             </div>
 
-            {/* Scroll Indicator */}
-            <div className="mt-16 animate-bounce">
-              <svg
-                className="w-6 h-6 text-muted-foreground mx-auto"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                />
-              </svg>
-            </div>
           </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="mt-20 flex justify-center animate-bounce">
+          <svg
+            className="w-6 h-6 text-muted-foreground"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 14l-7 7m0 0l-7-7m7 7V3"
+            />
+          </svg>
         </div>
       </div>
     </section>
