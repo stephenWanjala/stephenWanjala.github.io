@@ -1,4 +1,4 @@
-interface Experience {
+export interface Experience {
   company: string;
   companyLink: string;
   logo?: string;
@@ -10,49 +10,53 @@ interface Experience {
   }[];
 }
 
-interface Project {
+export interface Project {
   title: string;
+  name: string;
   link: string;
-  tagline: string;
+  gitName: string;
+  description?: string;
+  tags: string[];
+  image: string;
+  stars?: string;
+  forks?: string;
+  contributors?: Contributor[];
+  webLink?: string;
 }
 
-interface Contact {
+export interface Contributor {
+  login: string;
+  avatar_url: string;
+  html_url: string;
+  contributions: number;
+}
+
+export interface Contact {
   email: string;
-  phone: string;
+  phone?: string;
   linkedin: Social;
   github: Social;
   twitter: Social;
 }
 
-interface Social {
+export interface Social {
   userName: string;
   link: string;
 }
 
-interface Skill {
+export interface Skill {
   title: string;
-  level: number;
   icon: string;
   color: string;
 }
 
-interface Education {
+export interface Education {
   degree: string;
   school: string;
   duration: string;
 }
 
-interface Language {
+export interface Language {
   name: string;
   description: string;
 }
-
-export type {
-  Experience,
-  Project,
-  Contact,
-  Social,
-  Skill,
-  Education,
-  Language,
-};

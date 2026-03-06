@@ -1,0 +1,214 @@
+'use client'
+
+import { contact } from '@/lib/data'
+import { useState } from 'react'
+import { GitHubIcon, LinkedInIcon, TwitterIcon, MailIcon } from './icons'
+
+interface FormData {
+  name: string
+  email: string
+  message: string
+}
+
+interface FormMeta {
+  submitted: boolean
+  loading: boolean
+  error: string
+}
+
+export function Contact() {
+  const [form, setForm] = useState<FormData>({ name: '', email: '', message: '' })
+  const [meta, setMeta] = useState<FormMeta>({ submitted: false, loading: false, error: '' })
+  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({})
+
+  const validate = (): boolean => {
+    const e: Partial<Record<keyof FormData, string>> = {}
+    if (!form.name.trim()) e.name = 'Name is required'
+    if (!form.email.trim()) e.email = 'Email is required'
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Invalid email address'
+    if (!form.message.trim()) e.message = 'Message is required'
+    else if (form.message.trim().length < 10) e.message = 'At least 10 characters'
+    setErrors(e)
+    return Object.keys(e).length === 0
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!validate()) return
+
+    setMeta({ submitted: false, loading: true, error: '' })
+
+    try {
+      const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Failed to send message')
+      }
+
+      setForm({ name: '', email: '', message: '' })
+      setMeta({ submitted: true, loading: false, error: '' })
+      setTimeout(() => setMeta((p) => ({ ...p, submitted: false })), 4000)
+    } catch (err) {
+      setMeta({
+        submitted: false,
+        loading: false,
+        error: err instanceof Error ? err.message : 'Something went wrong',
+      })
+    }
+  }
+
+  const updateField = (field: keyof FormData, value: string) => {
+    setForm((p) => ({ ...p, [field]: value }))
+    if (errors[field]) setErrors((p) => ({ ...p, [field]: undefined }))
+  }
+
+  const inputClass = (field: keyof FormData) =>
+    `w-full px-4 py-2.5 bg-background border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background transition-colors ${
+      errors[field] ? 'border-red-500' : 'border-border'
+    }`
+
+  return (
+    <section id="contact" className="py-20 px-4 bg-card">
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-3">
+            Get in Touch
+          </h2>
+          <p className="text-muted-foreground max-w-lg mx-auto">
+            Have a project in mind or want to collaborate? I&apos;d love to hear from you.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-[1fr,2fr] gap-10 items-start">
+          {/* Contact Info */}
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-sm font-medium text-primary uppercase tracking-wider mb-3">Email</h3>
+              <a
+                href={`mailto:${contact.email}`}
+                className="text-accent hover:underline text-sm break-all"
+              >
+                {contact.email}
+              </a>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-medium text-primary uppercase tracking-wider mb-3">Social</h3>
+              <div className="flex gap-2">
+                <a
+                  href={contact.github.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 text-muted-foreground hover:text-primary hover:bg-secondary rounded-lg transition-colors focus-ring"
+                  aria-label="GitHub"
+                >
+                  <GitHubIcon />
+                </a>
+                <a
+                  href={contact.linkedin.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 text-muted-foreground hover:text-primary hover:bg-secondary rounded-lg transition-colors focus-ring"
+                  aria-label="LinkedIn"
+                >
+                  <LinkedInIcon />
+                </a>
+                <a
+                  href={contact.twitter.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 text-muted-foreground hover:text-primary hover:bg-secondary rounded-lg transition-colors focus-ring"
+                  aria-label="Twitter"
+                >
+                  <TwitterIcon />
+                </a>
+                <a
+                  href={`mailto:${contact.email}`}
+                  className="p-2 text-muted-foreground hover:text-primary hover:bg-secondary rounded-lg transition-colors focus-ring"
+                  aria-label="Email"
+                >
+                  <MailIcon />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact Form */}
+          <form onSubmit={handleSubmit} className="space-y-5 bg-background rounded-xl p-6 sm:p-8 border border-border">
+            {meta.submitted && (
+              <div className="p-3 bg-accent/10 border border-accent/30 rounded-lg">
+                <p className="text-sm text-accent font-medium">
+                  Message sent! I&apos;ll get back to you soon.
+                </p>
+              </div>
+            )}
+
+            {meta.error && (
+              <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg">
+                <p className="text-sm text-red-600 dark:text-red-400 font-medium">{meta.error}</p>
+              </div>
+            )}
+
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-primary mb-1.5">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                value={form.name}
+                onChange={(e) => updateField('name', e.target.value)}
+                className={inputClass('name')}
+                placeholder="Your name"
+              />
+              {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+            </div>
+
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-primary mb-1.5">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={form.email}
+                onChange={(e) => updateField('email', e.target.value)}
+                className={inputClass('email')}
+                placeholder="you@example.com"
+              />
+              {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+            </div>
+
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium text-primary mb-1.5">
+                Message
+              </label>
+              <textarea
+                id="message"
+                value={form.message}
+                onChange={(e) => updateField('message', e.target.value)}
+                rows={5}
+                className={`${inputClass('message')} resize-none`}
+                placeholder="Tell me about your project..."
+              />
+              {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
+            </div>
+
+            <button
+              type="submit"
+              disabled={meta.loading}
+              className="w-full px-5 py-2.5 bg-accent text-accent-foreground font-medium rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity focus-ring"
+            >
+              {meta.loading ? 'Sending...' : 'Send Message'}
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  )
+}
