@@ -1,5 +1,32 @@
-node_modules
-.vite
+# Next.js build output
+.next/
+out/
+build/
+
+# Dependencies
+node_modules/
+.dist/
 dist
-.idea
+
+# Environment variables
 .env
+.env*.local
+
+# TypeScript declaration file
+next-env.d.ts
+
+# Optional: Various editor/tool files
+*.log
+npm-debug.log*
+.nyc_output
+coverage
+.grunt
+.lock-wscript
+build/Release
+.npm
+.node_repl_history
+.swc/
+
+# Local development files (e.g., from editors like VS Code)
+.vscode/
+.idea/
