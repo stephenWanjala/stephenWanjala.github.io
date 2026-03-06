@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light mode colors - Modern Dark Navy + Cyan Blue theme */
+  --background: 0 0% 100%;
+  --foreground: 210 40% 15%;
+  
+  /* Refined Dark Navy (primary) */
+  --primary: 210 45% 20%;
+  --primary-foreground: 0 0% 98%;
+  
+  /* Cyan/Teal accent */
+  --accent: 185 92% 44%;
+  --accent-foreground: 0 0% 100%;
+  
+  /* Secondary - softer gray-blue */
+  --secondary: 210 30% 85%;
+  --secondary-foreground: 210 40% 20%;
+  
+  /* Neutral variants */
+  --card: 0 0% 100%;
+  --card-foreground: 210 40% 15%;
+  
+  --muted: 210 20% 70%;
+  --muted-foreground: 210 30% 45%;
+  
+  --radius: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark mode */
+    --background: 210 40% 10%;
+    --foreground: 0 0% 95%;
+    
+    --primary: 210 45% 85%;
+    --primary-foreground: 210 40% 10%;
+    
+    --accent: 185 92% 54%;
+    --accent-foreground: 210 40% 10%;
+    
+    --secondary: 210 30% 25%;
+    --secondary-foreground: 0 0% 95%;
+    
+    --card: 210 40% 15%;
+    --card-foreground: 0 0% 95%;
+    
+    --muted: 210 20% 40%;
+    --muted-foreground: 210 20% 70%;
+  }
+}
+
+* {
+  @apply border-card;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-background text-foreground;
+  font-family: 'Geist', system-ui, -apple-system, sans-serif;
+  font-feature-settings: 'rlig' 1, 'calt' 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Merriweather', serif;
+  @apply font-bold;
+}
+
+a {
+  @apply text-accent hover:opacity-80 transition-opacity;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-card;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground;
+}
