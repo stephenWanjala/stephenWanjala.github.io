@@ -22,7 +22,7 @@
     "vitest": "^4.0.18",
     "vue": "^3.5.29",
     "vue-router": "^5.0.3",
-    "vuetify": "^3.12.1"
+    "vuetify": "^4.0.1"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.16.1",
