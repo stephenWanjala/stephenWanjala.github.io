@@ -1,7 +1,8 @@
 'use client'
 
 import { contact } from '@/lib/data'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
 import { GitHubIcon, LinkedInIcon, TwitterIcon, MailIcon } from './icons'
 
 interface FormData {
@@ -20,6 +21,8 @@ export function Contact() {
   const [form, setForm] = useState<FormData>({ name: '', email: '', message: '' })
   const [meta, setMeta] = useState<FormMeta>({ submitted: false, loading: false, error: '' })
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({})
+  const turnstileRef = useRef<TurnstileInstance>(undefined)
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
 
   const validate = (): boolean => {
     const e: Partial<Record<keyof FormData, string>> = {}
@@ -36,13 +39,18 @@ export function Contact() {
     e.preventDefault()
     if (!validate()) return
 
+    if (!turnstileToken) {
+      setMeta({ submitted: false, loading: false, error: 'Please complete the CAPTCHA' })
+      return
+    }
+
     setMeta({ submitted: false, loading: true, error: '' })
 
     try {
       const res = await fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, turnstileToken }),
       })
 
       if (!res.ok) {
@@ -51,9 +59,13 @@ export function Contact() {
       }
 
       setForm({ name: '', email: '', message: '' })
+      setTurnstileToken(null)
+      turnstileRef.current?.reset()
       setMeta({ submitted: true, loading: false, error: '' })
       setTimeout(() => setMeta((p) => ({ ...p, submitted: false })), 4000)
     } catch (err) {
+      turnstileRef.current?.reset()
+      setTurnstileToken(null)
       setMeta({
         submitted: false,
         loading: false,
@@ -199,9 +211,18 @@ export function Contact() {
               {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
             </div>
 
+            <Turnstile
+              ref={turnstileRef}
+              siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+              onSuccess={setTurnstileToken}
+              onExpire={() => setTurnstileToken(null)}
+              onError={() => setTurnstileToken(null)}
+              options={{ theme: 'auto' }}
+            />
+
             <button
               type="submit"
-              disabled={meta.loading}
+              disabled={meta.loading || !turnstileToken}
               className="w-full px-5 py-2.5 bg-accent text-accent-foreground font-medium rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity focus-ring"
             >
               {meta.loading ? 'Sending...' : 'Send Message'}
