@@ -11,7 +11,7 @@ dist
 # Environment variables
 .env
 .env*.local
-
+tsconfig.tsbuildinfo
 # TypeScript declaration file
 next-env.d.ts
 
