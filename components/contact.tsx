@@ -1,7 +1,7 @@
 'use client'
 
 import { contact } from '@/lib/data'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
 import { GitHubIcon, LinkedInIcon, TwitterIcon, MailIcon } from './icons'
 
@@ -23,6 +23,8 @@ export function Contact() {
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({})
   const turnstileRef = useRef<TurnstileInstance>(undefined)
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
 
   const validate = (): boolean => {
     const e: Partial<Record<keyof FormData, string>> = {}
@@ -222,7 +224,7 @@ export function Contact() {
 
             <button
               type="submit"
-              disabled={meta.loading || !turnstileToken}
+              disabled={meta.loading || (mounted && !turnstileToken)}
               className="w-full px-5 py-2.5 bg-accent text-accent-foreground font-medium rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity focus-ring"
             >
               {meta.loading ? 'Sending...' : 'Send Message'}
