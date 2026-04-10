@@ -18,6 +18,18 @@ export const contact: Contact = {
 
 export const projects: Project[] = [
   {
+    title: 'Compose DataTable',
+    name: 'Compose DataTable',
+    image: '/images/composeDataTable.png',
+    link: 'https://github.com/stephenWanjala/DataTable',
+    gitName: 'stephenWanjala/DataTable',
+    stars: '?',
+    forks: '?',
+    description:
+      'A highly customizable, feature-rich DataTable component for Compose Desktop built entirely on Foundation APIs -- no Material dependency required.',
+    tags: ['Compose Desktop', 'Kotlin', 'JetPack Compose'],
+  },
+  {
     title: 'geoSpartial Village',
     name: 'geoSpartial_village',
     image: '/images/geosparcial.jpeg',
