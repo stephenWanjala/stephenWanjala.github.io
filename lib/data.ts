@@ -101,7 +101,8 @@ export const experiences: Experience[] = [
         employmentType: 'Full time, Onsite',
         details: [
           'Developing and maintaining software applications, including mobile and desktop applications under the MaliPlus ERP.',
-          'Design and implement assigned features, modules, and enhancements for MaliPlus ERP.',
+          'Design and implement assigned features, modules, and enhancements for MaliPlus ERP ',
+          'Maintainer of the Maliplus Hr & Payroll System',
           'Collaborate with Support Team to troubleshoot and resolve software issues.',
         ],
       },
