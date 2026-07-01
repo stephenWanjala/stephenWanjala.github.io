@@ -4,9 +4,9 @@ import { GitHubIcon, LinkedInIcon, TwitterIcon, MailIcon, DownloadIcon, ArrowDow
 
 export function Hero() {
   return (
-    <section id="about" className="min-h-[calc(100vh-4rem)] flex items-center px-4 py-16 sm:py-20">
+    <section id="about" className="lg:min-h-[calc(100vh-4rem)] flex items-center px-4 py-16 sm:py-20">
       <div className="max-w-5xl mx-auto w-full">
-        <div className="grid md:grid-cols-[1fr,auto] gap-12 lg:gap-16 items-center">
+        <div className="grid md:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-center">
           {/* Content */}
           <div className="order-2 md:order-1">
             <p className="text-accent font-medium mb-3 text-sm tracking-wide uppercase">

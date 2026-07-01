@@ -97,7 +97,7 @@ export function Contact() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-[1fr,2fr] gap-10 items-start">
+        <div className="grid md:grid-cols-[1fr_2fr] gap-10 items-start">
           {/* Contact Info */}
           <div className="space-y-6">
             <div>
