@@ -30,7 +30,7 @@ export function Hero() {
                 Get in Touch
               </a>
               <a
-                href="/resume.pdf"
+                href="/Wanjala_Stephen_CV.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 border border-border text-primary font-medium rounded-lg hover:bg-secondary transition-colors focus-ring"
