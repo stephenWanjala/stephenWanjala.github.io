@@ -10,7 +10,8 @@ export default function Home() {
   return (
     <>
       <Navigation />
-      <main>
+      {/* pt-12 clears the fixed 48px Carbon UI Shell header */}
+      <main className="pt-12">
         <Hero />
         <Experience />
         <Projects />
