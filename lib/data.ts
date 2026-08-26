@@ -28,6 +28,7 @@ export const projects: Project[] = [
     description:
       'A highly customizable, feature-rich DataTable component for Compose Desktop built entirely on Foundation APIs -- no Material dependency required.',
     tags: ['Compose Desktop', 'Kotlin', 'JetPack Compose'],
+    webLink: 'https://stephenwanjala.github.io/DataTable/',
   },
   {
     title: 'geoSpartial Village',
