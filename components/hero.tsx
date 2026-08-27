@@ -119,12 +119,15 @@ export function Hero() {
                 className="absolute -top-4 -left-4 w-24 h-24 bg-blue-60 hidden sm:block"
                 aria-hidden="true"
               />
-              <div className="relative aspect-square w-full bg-layer overflow-hidden">
+              {/* The source is a 9:16 portrait, so a square tile would crop the
+                  head and torso. A 4:5 tile with the focal point held high keeps
+                  the full figure from the hair down. */}
+              <div className="relative aspect-[4/5] w-full bg-layer overflow-hidden">
                 <Image
                   src="/images/profile.jpg"
                   alt="Stephen Wanjala"
                   fill
-                  className="object-cover"
+                  className="object-cover object-[50%_20%]"
                   priority
                   sizes="(max-width: 1024px) 90vw, 40vw"
                 />
