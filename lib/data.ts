@@ -104,7 +104,10 @@ export const experiences: Experience[] = [
           'Developing and maintaining software applications, including mobile and desktop applications under the MaliPlus ERP.',
           'Design and implement assigned features, modules, and enhancements for MaliPlus ERP ',
           'Maintainer of the Maliplus Hr & Payroll System',
+          "Intergating third-party APIs and services into existing software applications to enhance functionality and improve user experience.",
           'Collaborate with Support Team to troubleshoot and resolve software issues.',
+          "Port legacy Maliplus Sacco from Java 8 Swing desktop to JavaFX 21 , ensuring improved user experience and performance.",
+          "Maintainer of the Maliplus Sacco System, responsible for implementing new features, fixing bugs, and ensuring the system's stability and performance.",
         ],
       },
       {
