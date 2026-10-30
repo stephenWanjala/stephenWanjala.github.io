@@ -58,10 +58,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f4f1ea' },
-    { media: '(prefers-color-scheme: dark)', color: '#0c0d10' },
-  ],
+  themeColor: '#0a0a0a',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
@@ -70,7 +67,7 @@ export const viewport: Viewport = {
 /**
  * Applies the stored theme before first paint so light never flashes over dark.
  */
-const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(!t){t='dark'}document.documentElement.classList.add(t)}catch(e){document.documentElement.classList.add('dark')}})()`
+const themeScript = `(function(){var t='dark';try{var s=localStorage.getItem('theme');if(s==='light'||s==='dark')t=s}catch(e){}document.documentElement.classList.add(t)})()`
 
 export default function RootLayout({
   children,

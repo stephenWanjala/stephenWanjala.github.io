@@ -276,6 +276,7 @@ export function ContactSection() {
                 </div>
 
                 <Turnstile
+                  key={theme}
                   ref={turnstileRef}
                   siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
                   onSuccess={setTurnstileToken}

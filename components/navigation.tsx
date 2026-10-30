@@ -13,7 +13,7 @@ const isActive = (pathname: string, href: string) =>
 export function Navigation() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
-  const { theme, toggleTheme } = useTheme()
+  const { toggleTheme } = useTheme()
 
   useEffect(() => setOpen(false), [pathname])
 
@@ -71,9 +71,10 @@ export function Navigation() {
             <button
               onClick={toggleTheme}
               className={iconBtn}
-              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+              aria-label="Toggle light and dark theme"
             >
-              {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+              <SunIcon className="w-5 h-5 hidden dark:block" />
+              <MoonIcon className="w-5 h-5 dark:hidden" />
             </button>
             <button
               onClick={() => setOpen((v) => !v)}
