@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from 'react'
 
-/** Carbon ships four themes; the portfolio uses the two extremes. */
+/** Light and dark. */
 type Theme = 'light' | 'dark'
 
 const ThemeContext = createContext<{

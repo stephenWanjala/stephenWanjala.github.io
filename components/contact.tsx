@@ -4,7 +4,7 @@ import { contact } from '@/lib/data'
 import { useEffect, useRef, useState } from 'react'
 import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
 import { useTheme } from './theme-provider'
-import { SectionHeading, Button, IconLink } from './ui'
+import { Button, IconLink } from './ui'
 import {
   GitHubIcon,
   LinkedInIcon,
@@ -29,16 +29,14 @@ interface FormMeta {
 }
 
 /**
- * Carbon TextInput: label above in `$label-01`, a `$field-01` fill, a single
- * `$border-strong` rule along the bottom, and a 2px inset focus outline.
- * Invalid fields swap the rule for `$support-error` and show helper text.
+ * Text field: label above, underlined input, error border + helper text when invalid.
  */
 const fieldClass = (invalid: boolean) =>
   [
-    'w-full bg-field px-4 text-body-01 text-fg placeholder:text-fg-placeholder',
-    'border-0 border-b transition-colors duration-[110ms] ease-productive',
-    'focus:outline-2 focus:outline-focus focus:-outline-offset-2',
-    invalid ? 'border-b-error' : 'border-b-line-strong hover:bg-field-hover',
+    'w-full bg-transparent px-0 text-body-02 text-fg placeholder:text-fg-placeholder',
+    'border-0 border-b-2 rounded-none transition-colors duration-[110ms]',
+    'focus:outline-none focus:border-blue-60',
+    invalid ? 'border-error' : 'border-line-strong',
   ].join(' ')
 
 function FieldError({ id, message }: { id: string; message?: string }) {
@@ -51,7 +49,7 @@ function FieldError({ id, message }: { id: string; message?: string }) {
   )
 }
 
-export function Contact() {
+export function ContactSection() {
   const [form, setForm] = useState<FormData>({ name: '', email: '', message: '' })
   const [meta, setMeta] = useState<FormMeta>({ submitted: false, loading: false, error: '' })
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({})
@@ -117,20 +115,12 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="bg-layer border-b border-line">
-      <div className="mx-auto max-w-[1584px] px-4 md:px-8 py-20 md:py-28">
-        <SectionHeading
-          index="04 / Contact"
-          title="Let's build something"
-          lede="Have a project, a role, or a question? Send a message and I'll get back to you."
-        />
-
-        <div className="grid lg:grid-cols-16 gap-12 lg:gap-0">
+    <div className="grid lg:grid-cols-16 gap-10 lg:gap-12">
           {/* Contact details */}
-          <div className="lg:col-span-5 lg:pr-12">
-            <dl className="border-t border-line">
-              <div className="py-5 border-b border-line">
-                <dt className="font-mono text-label-01 uppercase tracking-widest text-fg-helper mb-2">
+          <div className="lg:col-span-5">
+            <dl className="border-t-2 border-line-strong divide-y divide-line">
+              <div className="py-5">
+                <dt className="text-body-compact-01 text-fg-helper mb-1">
                   Email
                 </dt>
                 <dd>
@@ -144,15 +134,15 @@ export function Contact() {
                 </dd>
               </div>
 
-              <div className="py-5 border-b border-line">
-                <dt className="font-mono text-label-01 uppercase tracking-widest text-fg-helper mb-2">
+              <div className="py-5">
+                <dt className="text-body-compact-01 text-fg-helper mb-1">
                   Response time
                 </dt>
                 <dd className="text-body-01 text-fg-secondary">Usually within 48 hours</dd>
               </div>
 
-              <div className="py-5 border-b border-line">
-                <dt className="font-mono text-label-01 uppercase tracking-widest text-fg-helper mb-2">
+              <div className="py-5">
+                <dt className="text-body-compact-01 text-fg-helper mb-1">
                   Social
                 </dt>
                 <dd className="flex -ml-2">
@@ -189,10 +179,10 @@ export function Contact() {
           </div>
 
           {/* Form */}
-          <div className="lg:col-span-11 lg:border-l border-line lg:pl-12">
+          <div className="lg:col-span-11">
             {meta.submitted ? (
-              /* Carbon inline notification — success */
-              <div className="flex gap-4 bg-bg border-l-[3px] border-success p-4">
+              /* success notice */
+              <div className="flex gap-4 bg-success/10 border border-success/40  p-4">
                 <CheckmarkIcon className="w-5 h-5 text-success shrink-0 mt-0.5" />
                 <div>
                   <p className="text-heading-01 text-fg">Message sent</p>
@@ -210,10 +200,10 @@ export function Contact() {
             ) : (
               <form onSubmit={handleSubmit} noValidate className="space-y-6">
                 {meta.error && (
-                  /* Carbon inline notification — error */
+                  /* error notice */
                   <div
                     role="alert"
-                    className="flex gap-4 bg-bg border-l-[3px] border-error p-4"
+                    className="flex gap-4 bg-error-bg border border-error/40  p-4"
                   >
                     <ErrorFilledIcon className="w-5 h-5 text-error shrink-0 mt-0.5" />
                     <div>
@@ -305,8 +295,6 @@ export function Contact() {
               </form>
             )}
           </div>
-        </div>
-      </div>
-    </section>
+    </div>
   )
 }

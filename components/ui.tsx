@@ -1,76 +1,69 @@
-/**
- * Carbon component primitives.
- *
- * Sizing follows Carbon's field heights: `lg` = 48px (the default for
- * expressive layouts), `md` = 40px. Buttons put the label hard left and the
- * icon hard right, which is what makes a Carbon button read as one.
- */
-import type { ReactNode } from 'react'
+/** Shared primitives. Square corners, hard rules, one accent colour. */
+import Link from 'next/link'
+import type { ComponentProps, ReactNode } from 'react'
 
-type ButtonKind = 'primary' | 'secondary' | 'tertiary' | 'ghost'
+type ButtonKind = 'primary' | 'secondary'
 
 const buttonKind: Record<ButtonKind, string> = {
-  primary:
-    'bg-btn text-white hover:bg-btn-hover active:bg-btn-active focus-ring-filled',
-  secondary:
-    'bg-btn-secondary text-white hover:bg-btn-secondary-hover active:bg-btn-active focus-ring-filled',
-  tertiary:
-    'bg-transparent text-link border border-link hover:bg-link hover:text-white active:bg-btn-active active:border-btn-active focus-ring',
-  ghost:
-    'bg-transparent text-link hover:bg-layer-hover active:bg-layer-accent focus-ring',
+  primary: 'bg-btn text-fg-on-color hover:bg-btn-hover',
+  secondary: 'border-2 border-line-strong text-fg hover:bg-fg hover:text-fg-inverse',
 }
 
 const buttonBase =
-  'group inline-flex items-center justify-between gap-8 text-body-compact-01 font-normal ' +
-  'transition-colors duration-[110ms] ease-productive disabled:cursor-not-allowed ' +
-  'disabled:bg-layer-accent disabled:text-fg-placeholder disabled:border-transparent'
+  'inline-flex items-center justify-between gap-6 h-12 px-5 text-body-compact-01 font-semibold ' +
+  'transition-colors duration-[110ms] ease-productive focus-ring ' +
+  'disabled:cursor-not-allowed disabled:bg-layer-accent disabled:text-fg-placeholder'
 
-interface CarbonButtonProps {
-  children: ReactNode
+interface ButtonProps {
   icon?: ReactNode
   kind?: ButtonKind
-  className?: string
 }
 
-/** Anchor styled as a Carbon button. */
 export function ButtonLink({
   children,
   icon,
   kind = 'primary',
   className = '',
   ...props
-}: CarbonButtonProps & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+}: ButtonProps & ComponentProps<typeof Link>) {
   return (
-    <a
-      className={`${buttonBase} ${buttonKind[kind]} h-12 pl-4 pr-4 min-w-[11rem] ${className}`}
-      {...props}
-    >
-      <span>{children}</span>
+    <Link className={`${buttonBase} ${buttonKind[kind]} ${className}`} {...props}>
+      {children}
+      {icon}
+    </Link>
+  )
+}
+
+export function ExternalButton({
+  children,
+  icon,
+  kind = 'primary',
+  className = '',
+  ...props
+}: ButtonProps & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+  return (
+    <a className={`${buttonBase} ${buttonKind[kind]} ${className}`} {...props}>
+      {children}
       {icon}
     </a>
   )
 }
 
-/** <button> styled as a Carbon button. */
 export function Button({
   children,
   icon,
   kind = 'primary',
   className = '',
   ...props
-}: CarbonButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) {
+}: ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
-    <button
-      className={`${buttonBase} ${buttonKind[kind]} h-12 pl-4 pr-4 min-w-[11rem] ${className}`}
-      {...props}
-    >
-      <span>{children}</span>
+    <button className={`${buttonBase} ${buttonKind[kind]} ${className}`} {...props}>
+      {children}
       {icon}
     </button>
   )
 }
 
-/** Carbon icon-only link — 40px square, square corners, no label. */
 export function IconLink({
   children,
   className = '',
@@ -78,7 +71,7 @@ export function IconLink({
 }: { children: ReactNode; className?: string } & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
     <a
-      className={`inline-flex items-center justify-center w-10 h-10 text-fg-secondary hover:bg-layer-hover hover:text-fg transition-colors duration-[110ms] ease-productive focus-ring ${className}`}
+      className={`inline-flex items-center justify-center w-10 h-10 text-fg hover:bg-fg hover:text-fg-inverse transition-colors duration-[110ms] focus-ring ${className}`}
       {...props}
     >
       {children}
@@ -86,41 +79,29 @@ export function IconLink({
   )
 }
 
-/**
- * Carbon tag. Tags are the one component in the system that keeps a radius —
- * a full pill at 0.9375rem.
- */
-export function Tag({ children }: { children: ReactNode }) {
-  return (
-    <span className="inline-flex items-center h-6 px-3 rounded-full bg-layer-accent text-fg text-label-01 whitespace-nowrap">
-      {children}
-    </span>
-  )
+export function Container({
+  children,
+  className = '',
+}: {
+  children: ReactNode
+  className?: string
+}) {
+  return <div className={`mx-auto w-full max-w-[90rem] px-5 md:px-10 ${className}`}>{children}</div>
 }
 
-/**
- * Section heading: a mono index, the blue rule, then a fluid expressive
- * heading — the Carbon editorial pattern.
- */
-export function SectionHeading({
-  index,
-  title,
-  lede,
-}: {
-  index: string
-  title: string
-  lede?: string
-}) {
+/** Page title: one big word, a short plain sentence, a heavy rule underneath. */
+export function PageHeader({ title, lede }: { title: string; lede?: string }) {
   return (
-    <header className="mb-12 md:mb-16">
-      <p className="font-mono text-label-01 text-link tracking-widest mb-4">{index}</p>
-      <div className="w-12 h-[3px] bg-blue-60 mb-6" aria-hidden="true" />
-      <h2 className="text-fluid-heading-05 text-fg max-w-2xl text-balance">
-        {title}
-      </h2>
-      {lede && (
-        <p className="mt-4 text-body-02 text-fg-secondary max-w-xl text-pretty">{lede}</p>
-      )}
-    </header>
+    <div className="border-b-2 border-line-strong">
+      <Container className="pt-14 pb-10 md:pt-24 md:pb-14">
+        <h1 className="text-fluid-display-02 text-fg">
+          {title}
+          <span className="text-blue-60">.</span>
+        </h1>
+        {lede && (
+          <p className="mt-6 text-heading-03 text-fg-secondary max-w-2xl text-pretty">{lede}</p>
+        )}
+      </Container>
+    </div>
   )
 }

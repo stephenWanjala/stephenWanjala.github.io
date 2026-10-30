@@ -1,12 +1,14 @@
 import type { Metadata, Viewport } from 'next'
-import { IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google'
+import { Space_Grotesk, IBM_Plex_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
+import { Navigation } from '@/components/navigation'
+import { Footer } from '@/components/footer'
 import './globals.css'
 
-const plexSans = IBM_Plex_Sans({
+const display = Space_Grotesk({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
-  variable: '--font-plex-sans',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-display',
   display: 'swap',
 })
 
@@ -18,7 +20,10 @@ const plexMono = IBM_Plex_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Stephen Wanjala | Software Developer',
+  title: {
+    default: 'Stephen Wanjala | Software Developer',
+    template: '%s',
+  },
   description:
     'Software developer specializing in mobile, web, and backend development. Building robust solutions with Kotlin, React, and modern frameworks.',
   authors: [{ name: 'Stephen Wanjala' }],
@@ -54,8 +59,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#161616' },
+    { media: '(prefers-color-scheme: light)', color: '#f4f1ea' },
+    { media: '(prefers-color-scheme: dark)', color: '#0c0d10' },
   ],
   width: 'device-width',
   initialScale: 1,
@@ -63,10 +68,9 @@ export const viewport: Viewport = {
 }
 
 /**
- * Applies the stored Carbon theme before first paint so the White theme never
- * flashes over Gray 100 (or vice versa).
+ * Applies the stored theme before first paint so light never flashes over dark.
  */
-const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.classList.add(t)}catch(e){document.documentElement.classList.add('dark')}})()`
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(!t){t='dark'}document.documentElement.classList.add(t)}catch(e){document.documentElement.classList.add('dark')}})()`
 
 export default function RootLayout({
   children,
@@ -74,14 +78,26 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${display.variable} ${plexMono.variable}`}
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.17.0/devicon.min.css"
+        />
       </head>
       <body
-        className={`${plexSans.variable} ${plexMono.variable} font-sans antialiased`}
+        className="font-sans antialiased"
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <Navigation />
+          <main id="main">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   )
