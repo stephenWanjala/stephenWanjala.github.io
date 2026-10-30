@@ -1,66 +1,58 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   IBM Carbon Design System v11 — token layer
-   Palette: IBM Design Language greys + blues
-   Themes:  White (default)  /  Gray 100 (.dark)
+   Design tokens. Light by default, `.dark` overrides the contextual layer.
+   Token names are kept stable so components never reference raw colours.
    ========================================================================== */
 
 @theme {
-  /* --- Core palette (IBM Design Language) ------------------------------ */
-  --color-blue-20: #d0e2ff;
-  --color-blue-40: #78a9ff;
-  --color-blue-50: #4589ff;
-  --color-blue-60: #0f62fe;
-  --color-blue-70: #0043ce;
-  --color-blue-80: #002d9c;
-  --color-gray-10: #f4f4f4;
-  --color-gray-20: #e0e0e0;
-  --color-gray-30: #c6c6c6;
-  --color-gray-40: #a8a8a8;
-  --color-gray-50: #8d8d8d;
-  --color-gray-60: #6f6f6f;
-  --color-gray-70: #525252;
-  --color-gray-80: #393939;
-  --color-gray-90: #262626;
-  --color-gray-100: #161616;
+  --color-blue-20: #ffd9c9;
+  --color-blue-40: #ff9a70;
+  --color-blue-50: #ff7a45;
+  --color-blue-60: #ff5a1f;
+  --color-blue-70: #e24410;
+  --color-blue-80: #b8340a;
+  --color-gray-10: #f4f1ea;
+  --color-gray-30: #c9c6bd;
+  --color-gray-40: #a09d94;
+  --color-gray-100: #0a0a0a;
 
-  /* --- Contextual tokens — White theme --------------------------------- */
-  --color-bg: #ffffff;               /* $background          */
-  --color-bg-hover: #e8e8e8;         /* $background-hover    */
-  --color-bg-inverse: #393939;       /* $background-inverse  */
-  --color-layer: #f4f4f4;            /* $layer-01            */
-  --color-layer-hover: #e8e8e8;      /* $layer-hover-01      */
-  --color-layer-2: #ffffff;          /* $layer-02            */
-  --color-layer-accent: #e0e0e0;     /* $layer-accent-01     */
-  --color-field: #f4f4f4;            /* $field-01            */
-  --color-field-hover: #e8e8e8;      /* $field-hover-01      */
+  --color-bg: #f4f1ea;
+  --color-bg-hover: #ebe7dd;
+  --color-layer: #ebe7dd;
+  --color-layer-hover: #e1ddd1;
+  --color-layer-2: #e1ddd1;
+  --color-layer-accent: #d6d1c3;
+  --color-field: transparent;
+  --color-field-hover: #ebe7dd;
 
-  --color-line: #e0e0e0;             /* $border-subtle-01    */
-  --color-line-strong: #8d8d8d;      /* $border-strong-01    */
-  --color-line-inverse: #161616;     /* $border-inverse      */
-  --color-interactive: #0f62fe;      /* $interactive         */
-  --color-focus: #0f62fe;            /* $focus               */
+  --color-line: #cfcabb;
+  --color-line-strong: #0a0a0a;
+  --color-interactive: #c93600;
+  --color-focus: #0a0a0a;
 
-  --color-fg: #161616;               /* $text-primary        */
-  --color-fg-secondary: #525252;     /* $text-secondary      */
-  --color-fg-helper: #6f6f6f;        /* $text-helper         */
-  --color-fg-placeholder: #a8a8a8;   /* $text-placeholder    */
-  --color-fg-on-color: #ffffff;      /* $text-on-color       */
-  --color-fg-inverse: #ffffff;       /* $text-inverse        */
+  --color-fg: #0a0a0a;
+  --color-fg-secondary: #3b3a36;
+  --color-fg-helper: #66645c;
+  --color-fg-placeholder: #8f8c82;
+  --color-fg-on-color: #0a0a0a;
+  --color-fg-inverse: #f4f1ea;
 
-  --color-link: #0f62fe;             /* $link-primary        */
-  --color-link-hover: #0043ce;       /* $link-primary-hover  */
+  --color-link: #c93600;
+  --color-link-hover: #8f2600;
 
-  --color-btn: #0f62fe;              /* $button-primary      */
-  --color-btn-hover: #0050e6;        /* $button-primary-hover*/
-  --color-btn-active: #002d9c;       /* $button-primary-active */
-  --color-btn-secondary: #393939;    /* $button-secondary    */
-  --color-btn-secondary-hover: #4c4c4c;
+  --color-btn: #ff5a1f;
+  --color-btn-hover: #ff7a45;
+  --color-btn-active: #e24410;
+  --color-btn-secondary: #0a0a0a;
+  --color-btn-secondary-hover: #2a2a28;
 
-  --color-error: #da1e28;            /* $support-error       */
-  --color-error-bg: #fff1f1;
-  --color-success: #24a148;          /* $support-success     */
+  --color-error: #c4161c;
+  --color-error-bg: #fde8e8;
+  --color-success: #1a7f45;
+
+  --radius-card: 0;
+  --radius-control: 0;
 
   /* --- Carbon type scale (IBM Plex Sans) ------------------------------- */
   --text-caption-01: 0.75rem;
@@ -126,18 +118,28 @@
   --text-fluid-heading-05: clamp(2rem, 1.5rem + 2.5vw, 3rem);
   --text-fluid-heading-05--line-height: 1.15;
   --text-fluid-heading-05--letter-spacing: 0;
-  --text-fluid-heading-05--font-weight: 300;
+  --text-fluid-heading-05--font-weight: 400;
 
   --text-fluid-display-01: clamp(2.625rem, 1.2rem + 6vw, 5.25rem);
   --text-fluid-display-01--line-height: 1.07;
   --text-fluid-display-01--letter-spacing: -0.015em;
-  --text-fluid-display-01--font-weight: 300;
+  --text-fluid-display-01--font-weight: 500;
 
-  /* --- Fonts ------------------------------------------------------------ */
-  --font-sans: var(--font-plex-sans), "IBM Plex Sans", system-ui, sans-serif;
+
+  --text-mega: clamp(2.75rem, 1rem + 8vw, 6.5rem);
+  --text-mega--line-height: 0.92;
+  --text-mega--letter-spacing: -0.045em;
+  --text-mega--font-weight: 700;
+
+  --text-fluid-display-02: clamp(3rem, 1rem + 9vw, 9rem);
+  --text-fluid-display-02--line-height: 0.9;
+  --text-fluid-display-02--letter-spacing: -0.04em;
+  --text-fluid-display-02--font-weight: 700;
+
+  --font-sans: var(--font-display), "Space Grotesk", system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
 
-  /* --- Carbon motion ---------------------------------------------------- */
+  /* --- Motion ---------------------------------------------------- */
   --ease-productive: cubic-bezier(0.2, 0, 0.38, 0.9);
   --ease-entrance: cubic-bezier(0, 0, 0.38, 0.9);
   --ease-exit: cubic-bezier(0.2, 0, 1, 0.9);
@@ -157,61 +159,53 @@
   }
 }
 
-/* --- Gray 100 theme ---------------------------------------------------- */
 @custom-variant dark (&:where(.dark, .dark *));
 
 .dark {
-  --color-bg: #161616;
-  --color-bg-hover: #353535;
-  --color-bg-inverse: #f4f4f4;
-  --color-layer: #262626;
-  --color-layer-hover: #333333;
-  --color-layer-2: #393939;
-  --color-layer-accent: #393939;
-  --color-field: #262626;
-  --color-field-hover: #333333;
+  --color-bg: #0a0a0a;
+  --color-bg-hover: #141414;
+  --color-layer: #121212;
+  --color-layer-hover: #1b1b1b;
+  --color-layer-2: #1b1b1b;
+  --color-layer-accent: #262626;
+  --color-field: transparent;
+  --color-field-hover: #121212;
 
-  --color-line: #393939;
-  --color-line-strong: #6f6f6f;
-  --color-line-inverse: #f4f4f4;
-  --color-interactive: #4589ff;
-  --color-focus: #ffffff;
+  --color-line: #2a2a2a;
+  --color-line-strong: #f4f1ea;
+  --color-interactive: #ff7a45;
+  --color-focus: #f4f1ea;
 
-  --color-fg: #f4f4f4;
-  --color-fg-secondary: #c6c6c6;
-  --color-fg-helper: #a8a8a8;
-  --color-fg-placeholder: #6f6f6f;
-  --color-fg-on-color: #ffffff;
-  --color-fg-inverse: #161616;
+  --color-fg: #f4f1ea;
+  --color-fg-secondary: #bdbab0;
+  --color-fg-helper: #8a877e;
+  --color-fg-placeholder: #5c5a54;
+  --color-fg-on-color: #0a0a0a;
+  --color-fg-inverse: #0a0a0a;
 
-  --color-link: #78a9ff;
-  --color-link-hover: #a6c8ff;
+  --color-link: #ff7a45;
+  --color-link-hover: #ffa57d;
 
-  --color-btn: #0f62fe;
-  --color-btn-hover: #0050e6;
-  --color-btn-active: #002d9c;
-  --color-btn-secondary: #6f6f6f;
-  --color-btn-secondary-hover: #606060;
+  --color-btn: #ff5a1f;
+  --color-btn-hover: #ff7a45;
+  --color-btn-active: #e24410;
+  --color-btn-secondary: #f4f1ea;
+  --color-btn-secondary-hover: #ffffff;
 
-  --color-error: #fa4d56;
-  --color-error-bg: #2d0709;
-  --color-success: #42be65;
+  --color-error: #ff6b74;
+  --color-error-bg: #2d0f12;
+  --color-success: #4ade80;
 }
 
-/* ==========================================================================
-   Base
-   ========================================================================== */
-
 @layer base {
-  * {
-    border-color: var(--color-line);
-    /* Carbon draws square corners everywhere except tags and the loading spinner. */
-    border-radius: 0;
-  }
+  :root { color-scheme: light; }
+  .dark { color-scheme: dark; }
+
+  * { border-color: var(--color-line); }
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 3rem; /* UI Shell header is 48px */
+    scroll-padding-top: 4.5rem;
     -webkit-text-size-adjust: 100%;
   }
 
@@ -224,16 +218,9 @@
     transition: background-color 150ms var(--ease-productive);
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-sans);
-    /* Carbon headings lean on weight 300/400 at display sizes, 600 at UI sizes. */
-    font-weight: 400;
-  }
+  h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans); font-weight: 600; letter-spacing: -0.02em; }
 
-  ::selection {
-    background-color: var(--color-blue-60);
-    color: #ffffff;
-  }
+  ::selection { background-color: var(--color-blue-60); color: #0a0a0a; }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -245,51 +232,12 @@
   }
 }
 
-/* Carbon scrollbar — square, quiet */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: var(--color-bg);
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: var(--color-line-strong);
-  border: 3px solid var(--color-bg);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-fg-helper);
-}
-
-/* ==========================================================================
-   Carbon utilities
-   ========================================================================== */
-
-/* $focus — 2px inset outline, never a soft ring */
 @utility focus-ring {
-  &:focus-visible {
-    outline: 2px solid var(--color-focus);
-    outline-offset: -2px;
-  }
+  &:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 }
-
-/* Focus style for elements sitting on the always-dark UI Shell header */
 @utility focus-ring-inverse {
-  &:focus-visible {
-    outline: 2px solid #ffffff;
-    outline-offset: -2px;
-  }
+  &:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 }
-
-/* Filled buttons get Carbon's double ring: white inner, $focus outer */
 @utility focus-ring-filled {
-  &:focus-visible {
-    outline: 2px solid #ffffff;
-    outline-offset: -3px;
-    box-shadow: inset 0 0 0 1px var(--color-focus);
-  }
+  &:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 }
-

@@ -1,24 +1,28 @@
-import { Navigation } from '@/components/navigation'
+import Link from 'next/link'
 import { Hero } from '@/components/hero'
-import { Experience } from '@/components/experience'
-import { Projects } from '@/components/projects'
-import { Skills } from '@/components/skills'
-import { Contact } from '@/components/contact'
-import { Footer } from '@/components/footer'
+import { ProjectList } from '@/components/project-list'
+import { Container } from '@/components/ui'
+import { ArrowRightIcon } from '@/components/icons'
+import { projects } from '@/lib/data'
 
 export default function Home() {
   return (
     <>
-      <Navigation />
-      {/* pt-12 clears the fixed 48px Carbon UI Shell header */}
-      <main className="pt-12">
-        <Hero />
-        <Experience />
-        <Projects />
-        <Skills />
-        <Contact />
-      </main>
-      <Footer />
+      <Hero />
+      <Container className="mt-16 md:mt-24">
+        <div className="flex items-baseline justify-between gap-4 mb-8">
+          <h2 className="text-heading-06 md:text-fluid-heading-05 font-bold tracking-tight">
+            Recent projects
+          </h2>
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-1.5 text-body-01 font-semibold underline underline-offset-4 decoration-2 hover:text-link focus-ring"
+          >
+            All projects <ArrowRightIcon />
+          </Link>
+        </div>
+        <ProjectList items={projects.slice(0, 3)} />
+      </Container>
     </>
   )
 }
