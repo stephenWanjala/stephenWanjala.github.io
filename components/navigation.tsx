@@ -23,7 +23,16 @@ export function Navigation() {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
     document.addEventListener('keydown', onKey)
     document.body.style.overflow = 'hidden'
+
+    // The panel is `md:hidden`; if the viewport grows past `md` while it is
+    // open, close it so the lock does not outlive the visible menu.
+    const mq = window.matchMedia('(min-width: 48rem)')
+    const onChange = () => mq.matches && setOpen(false)
+    onChange()
+    mq.addEventListener('change', onChange)
+
     return () => {
+      mq.removeEventListener('change', onChange)
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = ''
     }
@@ -93,7 +102,7 @@ export function Navigation() {
         id="mobile-nav"
         aria-label="Mobile"
         hidden={!open}
-        className="md:hidden fixed inset-x-0 top-14 bottom-0 z-40 bg-bg px-5 pt-6"
+        className="md:hidden fixed inset-x-0 top-14 bottom-0 z-40 overflow-y-auto overscroll-contain bg-bg px-5 pt-6 pb-6"
       >
         <ul>
           {navItems.map((item) => (
